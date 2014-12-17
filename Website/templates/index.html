@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Medically</title>
+
+    {% load staticfiles %}
+
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://bootswatch.com/readable/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Medically</a>
+
+      </div>
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+
+
+
+        </ul>
+
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <li><a href="#">About</a></li>
+
+        </ul>
+      </div>
+    </div>
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+    {% endif %}
+    <div class="jumbotron">
+          <div class="container">
+            <h1>Medically</h1>
+            <p>Easy to use medical database for doctors.</p>
+
+                {#{% url 'medtext:login_process' %}#}
+
+                <form class="form-horizontal" role="form" action="" method="post">
+                    {% csrf_token %}
+                  <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="username" name="username" class="form-control" id="inputEmail3" placeholder="Username">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+    {#                  <div class="checkbox">#}
+    {#                    <label>#}
+    {#                      <input type="checkbox"> Remember me#}
+    {#                    </label>#}
+    {#                  </div>#}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default">Sign in</button>
+                    </div>
+                  </div>
+                </form>
+
+          </div>
+        </div>
+
+
+
+<div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Intuitive</h2>
+          <p>Learning curve is a big challenge for every user at some point. Medically makes the life easy for doctors who don't have the time for such kind of messy applications.</p>
+{#          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>#}
+        </div>
+        <div class="col-md-4">
+          <h2>Elegant</h2>
+          <p>Beautiful design in every corner. From recording a patient to getting past information about a surgery is always easy and quick.</p>
+{#          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>#}
+       </div>
+        <div class="col-md-4">
+          <h2>On The Cloud</h2>
+          <p>Have your patients all the time on the cloud. You will not feel the hassle of storing your patient's data again. Let Medically organize and store them for you.</p>
+{#          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>#}
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>© Medically 2014</p>
+      </footer>
+    </div>
+
+</body>
+</html>

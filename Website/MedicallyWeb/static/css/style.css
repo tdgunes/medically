@@ -1,0 +1,32 @@
+.navbar{
+    margin-bottom: 0px;
+}
+.jumbotron{
+    background-image: url("../images/background.jpg");
+}
+.jumbotron .container h1{
+    color: #abf2ff;
+    text-shadow: 1px 3px 2px #000000;
+}
+
+.jumbotron .container p{
+    color: whitesmoke;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+.jumbotron .container .control-label{
+    color: whitesmoke;
+    text-shadow: 2px 2px 1px #000000;
+}
+
+input#inputEmail3.form-control{
+    width: 20em;
+}
+
+input#inputPassword3.form-control{
+    width: 20em;
+}
+
+.alert{
+    margin-bottom: 0px;
+}

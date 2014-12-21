@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', views.homepage, name='homepage'),
+    url(r'^new_patient/$', views.new_patient_view, name="new_patient_view"),
 )

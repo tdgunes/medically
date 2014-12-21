@@ -4,6 +4,22 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
+def get_name(user):
+    full_name = user.first_name
+    if full_name.strip() == "":
+        full_name = user.username
+    return full_name
+
+
+def new_patient_view(request):
+    if not request.user.is_authenticated():
+        return redirect("homepage")
+    else:
+        full_name = get_name(request.user)
+        return render(request, 'patient.html',
+                      {"user": request.user, "full_name": get_name(request.user)})
+
+
 def homepage(request):
     if not request.user.is_authenticated():
         username = request.POST.get('username', None)
@@ -14,7 +30,7 @@ def homepage(request):
                 if user.is_active:
                     login(request, user)
                     # Redirect to a success page
-                    return redirect("Medically:homepage")
+                    return redirect("homepage")
                 else:
                     # Return a 'disabled account' error message
                     return render(request, 'index.html',
@@ -28,4 +44,3 @@ def homepage(request):
             return render(request, 'index.html', {"error": False, "error_message": ""})
     else:
         return render(request, 'index.html', {"error": True, "error_message": "Success."})
-

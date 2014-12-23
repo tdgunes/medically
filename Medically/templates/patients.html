@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Medically • Patients</title>
+
+    {% load staticfiles %}
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://bootswatch.com/readable/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'homepage' %}">Medically</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="{% url 'new_patient_view' %}">New Patient</a></li>
+
+        </ul>
+        <form class="navbar-form navbar-left">
+          <input type="text" class="form-control col-lg-8" placeholder="Search">
+
+        </form>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ full_name }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Profile</a></li>
+
+                  <li class="divider"></li>
+                  <li><a href="#">Logout</a></li>
+                </ul>
+             </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="patient-list">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Gender</th>
+              <th>City</th>
+              <th>Born Date</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for patient in patients %}
+          <tr  onclick="window.document.location='{% url 'patient' patient.id %}';">
+              <td>{{ patient.id }}</td>
+              <td>{{ patient.name_surname }}</td>
+              {% if patient.gender == "M" %}
+                <td>Male</td>
+              {% else %}
+                <td>Female</td>
+              {% endif %}
+              <td>{{ patient.city }}</td>
+              <td>{{ patient.born_date }}</td>
+            </tr>
+          {% endfor %}
+
+
+          </tbody>
+        </table>
+    </div>
+
+
+
+
+</body>
+</html>

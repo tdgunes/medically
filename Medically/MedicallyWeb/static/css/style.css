@@ -30,3 +30,12 @@ input#inputPassword3.form-control{
 .alert{
     margin-bottom: 0px;
 }
+
+.patient-list th {
+    color: #4588ff;
+}
+
+img.img-thumbnail.profile {
+    height: 140px;
+    width: 140px;
+}

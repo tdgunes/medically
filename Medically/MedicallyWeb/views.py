@@ -81,3 +81,7 @@ def login_main_page(request, user):
     patients = Patient.objects.all()
     return render(request, 'patients.html',
                   {"full_name": full_name, "patients": patients, "examination": False})
+
+def logout_view(request):
+    logout(request)
+    return redirect("homepage")

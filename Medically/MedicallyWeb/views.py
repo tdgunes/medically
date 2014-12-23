@@ -74,4 +74,10 @@ def homepage(request):
         else:
             return render(request, 'index.html', {"error": False, "error_message": ""})
     else:
-        return render(request, 'index.html', {"error": True, "error_message": "Success."})
+        return login_main_page(request, request.user)
+
+def login_main_page(request, user):
+    full_name = get_name(user)
+    patients = Patient.objects.all()
+    return render(request, 'patients.html',
+                  {"full_name": full_name, "patients": patients, "examination": False})

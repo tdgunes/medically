@@ -75,8 +75,6 @@
             // Read in the image file as a data URL.
             reader.readAsDataURL(f);
 
-
-{#            document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';#}
           }
 
           function handleDragOver(evt) {
@@ -129,7 +127,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="#">Profile</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Logout</a></li>
+                  <li><a href="{% url 'logout_view' %}">Logout</a></li>
                 </ul>
              </li>
         </ul>

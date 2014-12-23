@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
+from django.forms import ModelForm
+from MedicallyWeb.models import Patient
 
 
 # Create your views here.
@@ -18,6 +20,35 @@ def new_patient_view(request):
         full_name = get_name(request.user)
         return render(request, 'patient.html',
                       {"user": request.user, "full_name": get_name(request.user)})
+
+class PatientForm(ModelForm):
+    class Meta:
+        model = Patient
+        localized_fields = ('born_date',)
+
+def patient_view(request, patient_id):
+    if not request.user.is_authenticated():
+        return redirect("homepage")
+    else:
+        p = get_object_or_404(Patient, pk=patient_id)
+        print p+"a"
+        if request.method == "POST":
+            print p
+
+            form = PatientForm(request.POST, instance=p)
+
+            if form.is_valid():
+                form.save()
+                print "ss"
+                return redirect("patient_view", patient_id)
+            else:
+                return render(request, 'patient.html',
+                      {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True,
+                       "examinations": p.examination_set.all(),"errors":form.errors})
+
+        return render(request, 'patient.html',
+                      {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True,
+                       "examinations": p.examination_set.all()})
 
 
 def homepage(request):

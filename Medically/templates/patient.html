@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+	<link style="text/css" rel="style" href="patient.css">
     <meta charset="UTF-8">
-    <title>Patients</title>
+    <title>Patients · {{ patient.name_surname }}</title>
     
     {% load staticfiles %}
     
@@ -14,6 +15,32 @@
     <script>
     $( document ).ready(function() {
 
+        function handleFileSelectButton(evt) {
+            var files = evt.target.files; // FileList object
+
+            // files is a FileList of File objects. List some properties.
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+            return function(e) {
+              // Render thumbnail.
+              var ablock = document.createElement('a');
+              ablock.innerHTML = ['<img class="img-thumbnail" src="', e.target.result,
+                                '"id="profile-photo" title="', escape(theFile.name), '"/>'].join('');
+              document.getElementById('drop_zone').innerHTML = "";
+              document.getElementById('drop_zone').insertBefore(ablock, null);
+            };
+            })(files[0]);
+
+            reader.readAsDataURL(files[0]);
+
+
+
+          }
+
+        document.getElementById('files').addEventListener('change', handleFileSelectButton, false);
 
         function handleFileSelect(evt) {
             evt.stopPropagation();
@@ -88,8 +115,12 @@
       
       <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
+{#          <li class="active"><a href="#">Patients</a></li>#}
+            {% if not examination %}
                 <li class="active"><a href="#">New Patient</a></li>
-
+            {% else %}
+                <li class="active"><a href="#">{{ patient.name_surname }}</a></li>
+            {% endif %}
         </ul>
         
         <ul class="nav navbar-nav navbar-right">
@@ -101,7 +132,6 @@
                   <li><a href="#">Logout</a></li>
                 </ul>
              </li>
-{#          <li><a href="#">About</a></li>#}
         </ul>
       </div>
     </div>
@@ -127,7 +157,7 @@
   					<div class="form-group">
     					<label for="name-input" class="col-sm-2 control-label">Full Name:</label>
     					<div class="col-sm-10">
-      						<input type="text" name="name_surname" class="form-control" id="name-input" placeholder="Full Name" value="">
+      						<input type="text" name="name_surname" class="form-control" id="name-input" placeholder="Full Name" value="{{ patient.name_surname }}">
     					</div>
   					</div>
   					
@@ -135,14 +165,14 @@
     					<label for="id-input" class="col-sm-2 control-label">ID Number:</label>
     					<div class="col-sm-10">
       						<input type="number" class="form-control" id="id-input" 
-      						placeholder="ID Number" maxlength="11" name="social_security_number" value="">
+      						placeholder="ID Number" maxlength="11" name="social_security_number" value="{{ patient.social_security_number }}">
     					</div>
   					</div>
   					
   					<div class="form-group">
     					<label for="mail-input" class="col-sm-2 control-label">Email:</label>
     					<div class="col-sm-10">
-      						<input type="email" class="form-control" name="email" id="mail-input" placeholder="Email" value="">
+      						<input type="email" class="form-control" name="email" id="mail-input" placeholder="Email" value="{{ patient.email }}">
     					</div>
   					</div>
 				</div>
@@ -153,7 +183,7 @@
   					<div class="form-group">
     					<label for="bday-input" class="col-sm-2 control-label">Birthday:</label>
     					<div class="col-sm-10">
-      						<input type="date" class="form-control" id="bday-input" name="born_date" placeholder="Birthday" value="">
+      						<input type="date" class="form-control" id="bday-input" name="born_date" placeholder="Birthday" value="{{ patient.born_date.day }}/{{ patient.born_date.month}}/{{ patient.born_date.year }}">
     					</div>
   					</div>
   					
@@ -161,12 +191,18 @@
     					<label for="gender-input" class="col-sm-2 control-label">Gender:</label>
     					<div class="col-sm-10" id="gender-input">
       						<label class="radio-inline">
-
+                                {% if patient.gender == "F" %}
+  								    <input type="radio" name="gender" id="female-input" value="F" checked=true> Female
+                                {% else %}
                                     <input type="radio" name="gender" id="female-input" value="F"> Female
-
+                                {% endif %}
 							</label>
 							<label class="radio-inline">
+                                {% if patient.gender == "M" %}
+                                    <input type="radio" name="gender" id="male-input" value="M" checked=true> Male
+                                {% else %}
                                     <input type="radio" name="gender" id="male-input" value="M"> Male
+                                {% endif %}
 
 							</label>
     					</div>
@@ -175,7 +211,7 @@
   					<div class="form-group">
     					<label for="mphone-input" class="col-sm-2 control-label">Mobile Phone:</label>
     					<div class="col-sm-10">
-      						<input type="tel" class="form-control" name="mobile_phone" id="mphone-input" placeholder="Mobile Phone" value="">
+      						<input type="tel" class="form-control" name="mobile_phone" id="mphone-input" placeholder="Mobile Phone" value="{{ patient.mobile_phone }}">
     					</div>
   					</div>
   					
@@ -189,21 +225,21 @@
   					<div class="form-group" >
   						<label for="town-input" class="col-sm-2 control-label">Town:</label>
   						<div class="col-sm-10">
-  							<input type="text" class="form-control" id="town-input" name="town" placeholder="Town" value="">
+  							<input type="text" class="form-control" id="town-input" name="town" placeholder="Town" value="{{ patient.town }}">
   						</div>
 					</div>
 					
 					<div class="form-group" >
   						<label for="city-input" class="col-sm-2 control-label">City:</label>
   						<div class="col-sm-10">
-  							<input type="text" class="form-control" name="city" id="city-input" placeholder="City" value="">
+  							<input type="text" class="form-control" name="city" id="city-input" placeholder="City" value="{{ patient.city }}">
   						</div>
 					</div>  
   								
   					<div class="form-group">
   						<label for="country-input" class="col-sm-2 control-label">Country:</label>
   						<div class="col-sm-10">
-  							<input type="text" class="form-control" name="country" id="country-input" placeholder="Country" name="country" value="">
+  							<input type="text" class="form-control" name="country" id="country-input" placeholder="Country" name="country" value="{{ patient.country }}">
   						</div>
 					</div> 
 				</div>
@@ -214,21 +250,21 @@
   					<div class="form-group" >
     					<label for="hphone-input" class="col-sm-2 control-label">Home Phone:</label>
     					<div class="col-sm-10">
-      						<input type="tel" class="form-control" name="home_phone" id="hphone-input" placeholder="Home Phone" value="">
+      						<input type="tel" class="form-control" name="home_phone" id="hphone-input" placeholder="Home Phone" value="{{ patient.home_phone }}">
     					</div>
   					</div>
   					
   					<div class="form-group">
     					<label for="bphone-input" align="middle" class="col-sm-2 control-label">Business Phone:</label>
     					<div class="col-sm-10">
-      						<input type="tel" class="form-control" name="business_phone" id="bphone-input" placeholder="Business Phone" value="">
+      						<input type="tel" class="form-control" name="business_phone" id="bphone-input" placeholder="Business Phone" value="{{ patient.business_phone }}">
     					</div>
   					</div>
   					
   					<div class="form-group">
     					<label for="ibphone-input" class="col-sm-2 control-label">Int. Bus. Phone:</label>
     					<div class="col-sm-10">
-      						<input type="tel" class="form-control" name="internal_business_phone" id="ibphone-input" placeholder="Internal Business Phone" value="">
+      						<input type="tel" class="form-control" name="internal_business_phone" id="ibphone-input" placeholder="Internal Business Phone" value="{{ patient.internal_business_phone }}">
     					</div>
   					</div>
   					
@@ -243,7 +279,7 @@
     		<label for="address-input" class="col-sm-1 control-label">Address:</label>
     		<div class="col-sm-11"> 						
       			<textarea name="address" type="email" row="2" class="form-control" id="address-input"
-      			placeholder="Address" style="resize:none;"></textarea>
+      			placeholder="Address" style="resize:none;">{{ patient.address }}</textarea>
     		</div>
   		</div>
   		
@@ -251,7 +287,7 @@
     		<label for="description-input" class="col-sm-1 control-label">Description:</label>
     		<div class="col-sm-11">
       			<textarea name="description" type="text" row="2" class="form-control" id="description-input"
-      			placeholder="Description" style="resize:none;"></textarea>
+      			placeholder="Description" style="resize:none;">{{ patient.description }}</textarea>
     		</div>
   		</div>
 
@@ -274,7 +310,7 @@
 
 
           {% for exa in examinations %}
-          <tr  onclick="window.document.location='';">
+          <tr  onclick="window.document.location='{% url '#' patient.id %}';">
               <td>{{ exa.id }}</td>
               <td>{{ exa.date }}</td>
               <td>{{ exa.offered_treatment}}</td>

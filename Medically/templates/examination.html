@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{{ patient.name_surname }} · New Examination</title>
+    
+    {% load staticfiles %}
+    
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://bootswatch.com/readable/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'new-examination.css' %}" />
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'homepage' %}">Medically</a>
+      </div>
+      
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">{{ patient.name_surname }}</a></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ full_name }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'profile_view' %}">Profile</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% url 'logout_view' %}">Logout</a></li>
+                </ul>
+             </li>
+        </ul>
+      </div>
+    </div>
+
+	<div class="container">    
+        <div class="row" id="first-row" >
+    			<div class="col-md-8">
+    				<form class="form-horizontal" role="form">
+    					<div class="form-group">
+      						<label for="exam-date-input" class="col-sm-3 control-label">Examination Date:</label>
+      					<div class="col-sm-3">
+        					<input type="date" class="form-control" id="exam-date-input" placeholder="Examination Date">
+      					</div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-2" align="right">
+                  <button type="button" class="btn btn-default ">Voice Notes</button>
+                </div> 
+    					</div>
+    					
+              <div class="form-group" >
+                  <label for="exam-info-input" class="col-sm-3 control-label">Examination Info:</label>
+                  <div class="col-sm-9">
+                      <textarea type="text" row="4" class="form-control" id="exam-info-input" 
+                      placeholder="Examination Info" style="resize:none;"></textarea>
+                </div>
+              </div>
+
+    					<div class="form-group" >
+                  <label for="exam-info-input" class="col-sm-3 control-label">Diagnosis:</label>
+                  <div class="col-sm-9">
+                      <textarea type="text" row="4" class="form-control" id="diagnosis-input" 
+                      placeholder="Diagnosis" style="resize:none;"></textarea>
+                  </div>
+              </div>
+    					
+    					<div class="form-group" >
+                  <label for="treat-offer-input" class="col-sm-3 control-label">Treatment Offer:</label>
+                  <div class="col-sm-9">
+                     <input type="date" class="form-control" id="treat-offer-input" placeholder="Treatment Offer">
+                  </div>
+              </div>
+    					
+              <div class="form-group" >
+                  <label for="surgery-type-input" class="col-sm-3 control-label">Surgery Type:</label>
+                  <div class="col-sm-9">
+                     <input type="date" class="form-control" id="surgery-type-input" placeholder="Surgery Type">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label for="appoint-date-input" class="col-sm-3 control-label">Appointment Date:</label>
+                <div class="col-sm-3">
+                  <input type="date" class="form-control" id="appoint-date-input" placeholder="Appointment Date">
+                </div>
+              </div>
+
+              <div class="form-group" >
+                  <label for="planning-input" class="col-sm-3 control-label">Planning:</label>
+                  <div class="col-sm-9">
+                      <textarea type="text" row="4" class="form-control" id="planning-input" 
+                      placeholder="Planning" style="resize:none;"></textarea>
+                  </div>
+              </div>
+
+    				  </form>			
+                </div>
+
+    		<div class="col-md-2" id="exam-images">
+    				<a href="#"><img class="img-thumbnail" src="{% static 'images/profile.jpg' %}"
+              alt="..." id="profile-photo"></a>
+  			</div>
+  			
+
+		</div>
+        </div>
+</body>
+</html>

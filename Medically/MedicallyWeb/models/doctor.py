@@ -1,14 +1,15 @@
 __author__ = 'tdgunes'
 
+import datetime
 
 from django.db import models
+
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
-from django.utils import timezone
-from ..utils import generate_token_with_email
+import pytz
 
-import json, random, hashlib, datetime, uuid, pytz
+from ..utils import generate_token_with_email
 
 
 class DoctorManager(BaseUserManager):
@@ -57,7 +58,7 @@ class Doctor(AbstractBaseUser):
 
     full_name = models.CharField('Name & Surname', max_length=50)
     title = models.CharField('Title', max_length=50, choices=TITLES)
-    institution = models.CharField('Title', max_length=50)
+    institution = models.CharField('Institution', max_length=50)
 
     examinations = models.ManyToManyField('Examination')
 

@@ -4,9 +4,9 @@ __author__ = 'tdgunes'
 from ..models import Doctor
 
 def load_super_users(apps, schema_editor):
-    Doctor.objects.create_superuser(full_name="Taha Dogan Gunes", email="tdgunes@gmail.com", password="123456", title="Dr.",
+    Doctor.objects.create_superuser(full_name="Taha Dogan Gunes", email="tdgunes@gmail.com", password="123456", title="D",
                                     institution="Göztepe Medical Park")
-    Doctor.objects.create_superuser(full_name="Hakan Uyumaz", email="hakanuyumaz@gmail.com", password="123456", title="Dr.",
+    Doctor.objects.create_superuser(full_name="Hakan Uyumaz", email="hakanuyumaz@gmail.com", password="123456", title="A",
                                     institution="Acıbadem Universiteis")
 
     print("\n\nLoad Super Users:")

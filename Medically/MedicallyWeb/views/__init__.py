@@ -7,12 +7,10 @@ from .doctor import profile_view, registration_view, login_main_page, logout_vie
 from .patient import new_patient_view, patient_view
 from .examination import new_examination_view
 
-
-
 def homepage(request):
     if request.method == "POST":
         if not request.user.is_authenticated():
-            email = request.POST.get('username', None)
+            email = request.POST.get('email', None)
             password = request.POST.get('password', None)
 
             print email, password

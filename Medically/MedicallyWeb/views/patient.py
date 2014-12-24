@@ -3,7 +3,6 @@ __author__ = 'tdgunes'
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 
-#from . import get_name
 
 
 def new_patient_view(request):

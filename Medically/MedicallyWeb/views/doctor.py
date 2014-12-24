@@ -15,9 +15,10 @@ def profile_view(request):
         name = request.POST.get('name', None)
         username = request.POST.get('username', None)
         email = request.POST.get('email', None)
-        full_name = get_name(request.user)
+        full_name = request.user.full_name
 
         if name and username and email:
+            # TODO: must have title, institution, password, email, full_name as in registration
             print name, username, email
             user_from_db = User.objects.get(username__exact=request.user.username)
             user_from_db.username = username
@@ -25,7 +26,7 @@ def profile_view(request):
             user_from_db.first_name = name
             user_from_db.save()
 
-        return render(request, 'profile.html', {"full_name": user.full_name})
+        return render(request, 'profile.html', {"full_name": request.user.full_name})
 
 
 def login_main_page(request, user):

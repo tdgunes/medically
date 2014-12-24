@@ -32,11 +32,9 @@ def patient_view(request, patient_id):
         return redirect("homepage")
     else:
         p = get_object_or_404(Patient, pk=patient_id)
+
         if request.method == "POST":
-            print p
-
             form = PatientForm(request.POST, instance=p)
-
             if form.is_valid():
                 form.save()
                 print "ss"

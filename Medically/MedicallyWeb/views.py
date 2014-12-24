@@ -32,7 +32,6 @@ def patient_view(request, patient_id):
         return redirect("homepage")
     else:
         p = get_object_or_404(Patient, pk=patient_id)
-        print p+"a"
         if request.method == "POST":
             print p
 

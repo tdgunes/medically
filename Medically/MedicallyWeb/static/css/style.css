@@ -39,3 +39,10 @@ img.img-thumbnail.profile {
     height: 140px;
     width: 140px;
 }
+
+.form-horizontal{
+
+    margin-left: 2em;
+    margin-right: auto;
+    float: none;
+}

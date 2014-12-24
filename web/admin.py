@@ -24,8 +24,12 @@ class PatientAdmin(admin.ModelAdmin):
     inlines = [ExaminationInline]
 
 
+class DoctorAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'title','institution')
+    list_filter = ['full_name', 'title','institution']
+
 admin.site.register(Patient, PatientAdmin)
 admin.site.register(Examination, ExaminationAdmin)
-admin.site.register(Doctor)
+admin.site.register(Doctor, DoctorAdmin)
 
 admin.site.unregister(Group)

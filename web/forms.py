@@ -7,6 +7,7 @@ from .utils import generate_token_with_email
 import pytz
 import datetime
 
+
 class DoctorCreationFrom(forms.ModelForm):
     password = forms.CharField(label='Password')
 
@@ -19,8 +20,8 @@ class DoctorCreationFrom(forms.ModelForm):
         doctor = super(DoctorCreationFrom, self).save(commit=False)
 
         doctor.set_password(self.cleaned_data["password"])
-        doctor.activation_key=generate_token_with_email(self.cleaned_data["email"])
-        doctor.activation_expire_date=datetime.datetime.now(pytz.utc) + datetime.timedelta(2)
+        doctor.activation_key = generate_token_with_email(self.cleaned_data["email"])
+        doctor.activation_expire_date = datetime.datetime.now(pytz.utc) + datetime.timedelta(2)
         if commit:
             doctor.save()
 

@@ -114,3 +114,9 @@ def new_examination_view(request, patient_id):
         p = get_object_or_404(Patient, pk=patient_id)
         return render(request, 'examination.html',
                       {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True})
+
+def registration_view(request):
+    if request.user.is_authenticated():
+        return redirect("homepage")
+    else:
+        return render(request, 'register.html')

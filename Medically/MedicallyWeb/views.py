@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.forms import ModelForm
 from MedicallyWeb.models import Patient
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -85,3 +86,24 @@ def login_main_page(request, user):
 def logout_view(request):
     logout(request)
     return redirect("homepage")
+
+
+def profile_view(request):
+    if not request.user.is_authenticated():
+        return redirect("homepage")
+    else:
+        name = request.POST.get('name', None)
+        username = request.POST.get('username', None)
+        email = request.POST.get('email', None)
+        full_name = get_name(request.user)
+
+        if name and username and email:
+            print name, username, email
+            user_from_db = User.objects.get(username__exact=request.user.username)
+            user_from_db.username = username
+            user_from_db.email = email
+            user_from_db.first_name = name
+            user_from_db.save()
+            full_name = name
+
+        return render(request, 'profile.html', {"full_name": full_name})

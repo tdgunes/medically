@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^new_patient/$', views.new_patient_view, name="new_patient_view"),
     url(r'^(?P<patient_id>\d+)/$', views.patient_view, name='patient'),
     url(r'^logout/$', views.logout_view, name="logout_view"),
+    url(r'^profile/$', views.profile_view, name="profile_view"),
 )

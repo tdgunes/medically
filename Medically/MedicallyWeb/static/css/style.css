@@ -46,3 +46,25 @@ img.img-thumbnail.profile {
     margin-right: auto;
     float: none;
 }
+#exam-images {
+	overflow-y: visible;
+}
+#profile-photo {
+	width:140px;
+	height:140px;
+	margin-left:Auto;
+	margin-right:Auto;
+	margin-bottom:1em;
+	display:block;
+}
+
+.container {
+	display:block;
+	margin-left:Auto;
+	margin-right:Auto;
+	font-family:Helvetica Neue,Helvetica,Myriad Pro;
+	font-size:0.8em;
+	text-align:left;
+
+}
+

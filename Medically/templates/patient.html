@@ -1,99 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-  <link style="text/css" rel="style" href="patient.css">
+    <link style="text/css" rel="style" href="patient.css">
     <meta charset="UTF-8">
     <title>Patients · {{ patient.name_surname }}</title>
-    
+
     {% load staticfiles %}
-    
+
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://bootswatch.com/readable/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/patient.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/patient.css' %}"/>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>
-    $( document ).ready(function() {
+        $(document).ready(function () {
 
-        function handleFileSelectButton(evt) {
-            var files = evt.target.files; // FileList object
+            function handleFileSelectButton(evt) {
+                var files = evt.target.files; // FileList object
 
-            // files is a FileList of File objects. List some properties.
+                // files is a FileList of File objects. List some properties.
 
-            var reader = new FileReader();
+                var reader = new FileReader();
 
-            // Closure to capture the file information.
-            reader.onload = (function(theFile) {
-            return function(e) {
-              // Render thumbnail.
-              var ablock = document.createElement('a');
-              ablock.innerHTML = ['<img class="img-thumbnail" src="', e.target.result,
-                                '"id="profile-photo" title="', escape(theFile.name), '"/>'].join('');
-              document.getElementById('drop_zone').innerHTML = "";
-              document.getElementById('drop_zone').insertBefore(ablock, null);
-            };
-            })(files[0]);
+                // Closure to capture the file information.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Render thumbnail.
+                        var ablock = document.createElement('a');
+                        ablock.innerHTML = ['<img class="img-thumbnail" src="', e.target.result,
+                            '"id="profile-photo" title="', escape(theFile.name), '"/>'].join('');
+                        document.getElementById('drop_zone').innerHTML = "";
+                        document.getElementById('drop_zone').insertBefore(ablock, null);
+                    };
+                })(files[0]);
 
-            reader.readAsDataURL(files[0]);
+                reader.readAsDataURL(files[0]);
 
 
-
-          }
-
-        document.getElementById('files').addEventListener('change', handleFileSelectButton, false);
-
-        function handleFileSelect(evt) {
-            evt.stopPropagation();
-            evt.preventDefault();
-
-            var files = evt.dataTransfer.files; // FileList object.
-
-            // Loop through the FileList and render image files as thumbnails.
-
-            var  f = files[0];
-
-            if (!f.type.match('image.*')) {
-                alert("Please drag and drop an image file!")
-                return
             }
 
+            document.getElementById('files').addEventListener('change', handleFileSelectButton, false);
 
-            var reader = new FileReader();
+            function handleFileSelect(evt) {
+                evt.stopPropagation();
+                evt.preventDefault();
 
-            // Closure to capture the file information.
-            reader.onload = (function(theFile) {
-            return function(e) {
-              // Render thumbnail.
-              var ablock = document.createElement('a');
-              ablock.innerHTML = ['<img class="img-thumbnail" src="', e.target.result,
-                                '"id="profile-photo" title="', escape(theFile.name), '"/>'].join('');
-              document.getElementById('drop_zone').innerHTML = "";
-              document.getElementById('drop_zone').insertBefore(ablock, null);
-            };
-            })(f);
+                var files = evt.dataTransfer.files; // FileList object.
 
-            // Read in the image file as a data URL.
-            reader.readAsDataURL(f);
+                // Loop through the FileList and render image files as thumbnails.
 
-          }
+                var f = files[0];
 
-          function handleDragOver(evt) {
-            evt.stopPropagation();
-            evt.preventDefault();
-            evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
-          }
-
-          // Setup the dnd listeners.
-          var dropZone = document.getElementById('drop_zone');
-          dropZone.addEventListener('dragover', handleDragOver, false);
-          dropZone.addEventListener('drop', handleFileSelect, false);
+                if (!f.type.match('image.*')) {
+                    alert("Please drag and drop an image file!")
+                    return
+                }
 
 
-          $("#drop_zone").click(function(){
-                $( "#files" ).trigger( "click" );
-          });
+                var reader = new FileReader();
 
-    });
+                // Closure to capture the file information.
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        // Render thumbnail.
+                        var ablock = document.createElement('a');
+                        ablock.innerHTML = ['<img class="img-thumbnail" src="', e.target.result,
+                            '"id="profile-photo" title="', escape(theFile.name), '"/>'].join('');
+                        document.getElementById('drop_zone').innerHTML = "";
+                        document.getElementById('drop_zone').insertBefore(ablock, null);
+                    };
+                })(f);
+
+                // Read in the image file as a data URL.
+                reader.readAsDataURL(f);
+
+            }
+
+            function handleDragOver(evt) {
+                evt.stopPropagation();
+                evt.preventDefault();
+                evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+            }
+
+            // Setup the dnd listeners.
+            var dropZone = document.getElementById('drop_zone');
+            dropZone.addEventListener('dragover', handleDragOver, false);
+            dropZone.addEventListener('drop', handleFileSelect, false);
+
+
+            $("#drop_zone").click(function () {
+                $("#files").trigger("click");
+            });
+
+        });
 
 
     </script>
@@ -101,247 +100,273 @@
 
 <body>
 
-    <div class="navbar navbar-default">
-      <div class="navbar-header">
+<div class="navbar navbar-default">
+    <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="{% url 'homepage' %}">Medically</a>
-      </div>
-      
-      <div class="navbar-collapse collapse navbar-responsive-collapse">
+    </div>
+
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-{#          <li class="active"><a href="#">Patients</a></li>#}
+            {#          <li class="active"><a href="#">Patients</a></li>#}
             {% if not examination %}
                 <li class="active"><a href="#">New Patient</a></li>
             {% else %}
                 <li class="active"><a href="#">{{ patient.name_surname }}</a></li>
             {% endif %}
         </ul>
-        
+
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ full_name }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="{% url 'profile_view' %}">Profile</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'logout_view' %}">Logout</a></li>
+                    <li><a href="{% url 'profile_view' %}">Profile</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{% url 'logout_view' %}">Logout</a></li>
                 </ul>
-             </li>
+            </li>
         </ul>
-      </div>
     </div>
+</div>
 
-    {% if errors %}
-        <div class="alert alert-danger" role="alert">{{ errors }}</div>
-    {% endif %}
-    
-    <div class="container">    
-        <div class="row" id="first-row" >
-            <form class="form-horizontal" action="" method="post">
-            {% csrf_token %}
+{% if errors %}
+    <div class="alert alert-danger" role="alert">{{ errors }}</div>
+{% endif %}
+
+<div class="container">
+<div class="row" id="first-row">
+    <form class="form-horizontal" action="" method="post">
+        {% csrf_token %}
         <div class="col-md-2">
-           <div id="drop_zone">
-                    <img class="img-thumbnail" src="{% static 'images/profile.jpg' %}" alt="..." id="profile-photo">
+            <div id="drop_zone">
+                <img class="img-thumbnail" src="{% static 'images/profile.jpg' %}" alt="..." id="profile-photo">
+            </div>
+
+            <input type="file" id="files" class="hidden" name="files[]" accept="image/*">
+        </div>
+
+        <div class="col-md-5">
+            <div class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="name-input" class="col-sm-2 control-label">Full Name:</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" name="name_surname" class="form-control" id="name-input"
+                               placeholder="Full Name" value="{{ patient.name_surname }}">
+                    </div>
                 </div>
 
-                <input type="file" id="files" class="hidden" name="files[]" accept="image/*">
+                <div class="form-group">
+                    <label for="id-input" class="col-sm-2 control-label">ID Number:</label>
+
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="id-input"
+                               placeholder="ID Number" maxlength="11" name="social_security_number"
+                               value="{{ patient.social_security_number }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mail-input" class="col-sm-2 control-label">Email:</label>
+
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="email" id="mail-input" placeholder="Email"
+                               value="{{ patient.email }}">
+                    </div>
+                </div>
+            </div>
         </div>
-        
-      <div class="col-md-5">
+
+        <div class="col-md-5">
+            <div class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="bday-input" class="col-sm-2 control-label">Birthday:</label>
+
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="bday-input" name="born_date" placeholder="Birthday"
+                               value="{{ patient.born_date.day }}/{{ patient.born_date.month }}/{{ patient.born_date.year }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender-input" class="col-sm-2 control-label">Gender:</label>
+
+                    <div class="col-sm-10" id="gender-input">
+                        <label class="radio-inline">
+                            {% if patient.gender == "F" %}
+                                <input type="radio" name="gender" id="female-input" value="F" checked=true> Female
+                            {% else %}
+                                <input type="radio" name="gender" id="female-input" value="F"> Female
+                            {% endif %}
+                        </label>
+                        <label class="radio-inline">
+                            {% if patient.gender == "M" %}
+                                <input type="radio" name="gender" id="male-input" value="M" checked=true> Male
+                            {% else %}
+                                <input type="radio" name="gender" id="male-input" value="M"> Male
+                            {% endif %}
+
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="mphone-input" class="col-sm-2 control-label">Mobile Phone:</label>
+
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" name="mobile_phone" id="mphone-input"
+                               placeholder="Mobile Phone" value="{{ patient.mobile_phone }}">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</div>
+
+<div class="row" id="second-row">
+    <div class="col-md-7">
         <div class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="name-input" class="col-sm-2 control-label">Full Name:</label>
-              <div class="col-sm-10">
-                  <input type="text" name="name_surname" class="form-control" id="name-input" placeholder="Full Name" value="{{ patient.name_surname }}">
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="id-input" class="col-sm-2 control-label">ID Number:</label>
-              <div class="col-sm-10">
-                  <input type="number" class="form-control" id="id-input" 
-                  placeholder="ID Number" maxlength="11" name="social_security_number" value="{{ patient.social_security_number }}">
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="mail-input" class="col-sm-2 control-label">Email:</label>
-              <div class="col-sm-10">
-                  <input type="email" class="form-control" name="email" id="mail-input" placeholder="Email" value="{{ patient.email }}">
-              </div>
-            </div>
-        </div>
-      </div>
-      
-        <div class="col-md-5">
-          <div class="form-horizontal" role="form">
-            <div class="form-group">
-              <label for="bday-input" class="col-sm-2 control-label">Birthday:</label>
-              <div class="col-sm-10">
-                  <input type="date" class="form-control" id="bday-input" name="born_date" placeholder="Birthday" value="{{ patient.born_date.day }}/{{ patient.born_date.month}}/{{ patient.born_date.year }}">
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="gender-input" class="col-sm-2 control-label">Gender:</label>
-              <div class="col-sm-10" id="gender-input">
-                  <label class="radio-inline">
-                                {% if patient.gender == "F" %}
-                      <input type="radio" name="gender" id="female-input" value="F" checked=true> Female
-                                {% else %}
-                                    <input type="radio" name="gender" id="female-input" value="F"> Female
-                                {% endif %}
-              </label>
-              <label class="radio-inline">
-                                {% if patient.gender == "M" %}
-                                    <input type="radio" name="gender" id="male-input" value="M" checked=true> Male
-                                {% else %}
-                                    <input type="radio" name="gender" id="male-input" value="M"> Male
-                                {% endif %}
+                <label for="town-input" class="col-sm-2 control-label">Town:</label>
 
-              </label>
-              </div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="town-input" name="town" placeholder="Town"
+                           value="{{ patient.town }}">
+                </div>
             </div>
-            
+
             <div class="form-group">
-              <label for="mphone-input" class="col-sm-2 control-label">Mobile Phone:</label>
-              <div class="col-sm-10">
-                  <input type="tel" class="form-control" name="mobile_phone" id="mphone-input" placeholder="Mobile Phone" value="{{ patient.mobile_phone }}">
-              </div>
+                <label for="city-input" class="col-sm-2 control-label">City:</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="city" id="city-input" placeholder="City"
+                           value="{{ patient.city }}">
+                </div>
             </div>
-            
+
+            <div class="form-group">
+                <label for="country-input" class="col-sm-2 control-label">Country:</label>
+
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="country" id="country-input" placeholder="Country"
+                           name="country" value="{{ patient.country }}">
+                </div>
+            </div>
         </div>
-        </div>    
     </div>
 
-    <div class="row" id="second-row">
-      <div class="col-md-7">
+    <div class="col-md-5">
         <div class="form-horizontal" role="form">
-            <div class="form-group" >
-              <label for="town-input" class="col-sm-2 control-label">Town:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="town-input" name="town" placeholder="Town" value="{{ patient.town }}">
-              </div>
-          </div>
-          
-          <div class="form-group" >
-              <label for="city-input" class="col-sm-2 control-label">City:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="city" id="city-input" placeholder="City" value="{{ patient.city }}">
-              </div>
-          </div>  
-                  
             <div class="form-group">
-              <label for="country-input" class="col-sm-2 control-label">Country:</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="country" id="country-input" placeholder="Country" name="country" value="{{ patient.country }}">
-              </div>
-          </div> 
+                <label for="hphone-input" class="col-sm-2 control-label">Home Phone:</label>
+
+                <div class="col-sm-10">
+                    <input type="tel" class="form-control" name="home_phone" id="hphone-input" placeholder="Home Phone"
+                           value="{{ patient.home_phone }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="bphone-input" align="middle" class="col-sm-2 control-label">Business Phone:</label>
+
+                <div class="col-sm-10">
+                    <input type="tel" class="form-control" name="business_phone" id="bphone-input"
+                           placeholder="Business Phone" value="{{ patient.business_phone }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ibphone-input" class="col-sm-2 control-label">Int. Bus. Phone:</label>
+
+                <div class="col-sm-10">
+                    <input type="tel" class="form-control" name="internal_business_phone" id="ibphone-input"
+                           placeholder="Internal Business Phone" value="{{ patient.internal_business_phone }}">
+                </div>
+            </div>
+
         </div>
-      </div>
-      
-        <div class="col-md-5">
-          <div class="form-horizontal" role="form">
-            <div class="form-group" >
-              <label for="hphone-input" class="col-sm-2 control-label">Home Phone:</label>
-              <div class="col-sm-10">
-                  <input type="tel" class="form-control" name="home_phone" id="hphone-input" placeholder="Home Phone" value="{{ patient.home_phone }}">
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="bphone-input" align="middle" class="col-sm-2 control-label">Business Phone:</label>
-              <div class="col-sm-10">
-                  <input type="tel" class="form-control" name="business_phone" id="bphone-input" placeholder="Business Phone" value="{{ patient.business_phone }}">
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="ibphone-input" class="col-sm-2 control-label">Int. Bus. Phone:</label>
-              <div class="col-sm-10">
-                  <input type="tel" class="form-control" name="internal_business_phone" id="ibphone-input" placeholder="Internal Business Phone" value="{{ patient.internal_business_phone }}">
-              </div>
-            </div>
-            
-        </div>
-        </div>          
     </div>
-      
-    <div class="form-horizontal" role="form">
+</div>
+
+<div class="form-horizontal" role="form">
 
 
-    <div class="form-group" >
+    <div class="form-group">
         <label for="address-input" class="col-sm-1 control-label">Address:</label>
-        <div class="col-sm-11">             
+
+        <div class="col-sm-11">
             <textarea name="address" type="email" row="2" class="form-control" id="address-input"
-            placeholder="Address" style="resize:none;">{{ patient.address }}</textarea>
+                      placeholder="Address" style="resize:none;">{{ patient.address }}</textarea>
         </div>
-      </div>
-      
-      <div class="form-group" >
+    </div>
+
+    <div class="form-group">
         <label for="description-input" class="col-sm-1 control-label">Description:</label>
+
         <div class="col-sm-11">
             <textarea name="description" type="text" row="2" class="form-control" id="description-input"
-            placeholder="Description" style="resize:none;">{{ patient.description }}</textarea>
+                      placeholder="Description" style="resize:none;">{{ patient.description }}</textarea>
         </div>
-      </div>
+    </div>
 
+    {% if examination %}
+        <div class="form-group">
+            <label for="examination-table" style="font-size:1.5em">Examinations:
+                <button type="button" onClick="location.href='{% url 'new_examination' patient.id %}'"
+                        class="btn btn-default btn-xs">New Examination
+                </button>
+            </label>
+            <table class="table table-hover" id="examination-table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Examination Date</th>
+                    <th>Offered Treatment</th>
+                    <th>Surgery Type</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                {% for exa in examinations %}
+                    <tr onclick="window.document.location='{% url '#' patient.id %}';">
+                        <td>{{ exa.id }}</td>
+                        <td>{{ exa.date }}</td>
+                        <td>{{ exa.offered_treatment }}</td>
+                        <td>{{ exa.information }}</td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+
+
+    <br/>
+    <br/>
+
+    <div class="col-sm-9"></div>
+    <div class="col-sm-3" align="right">
         {% if examination %}
-      <div class="form-group" >
-          <label for="examination-table" style="font-size:1.5em">Examinations:
-              <button type="button" onClick="location.href='{% url 'new_examination' patient.id %}'" class="btn btn-default btn-xs">New Examination</button>
-          </label>
-          <table class="table table-hover" id="examination-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Examination Date</th>
-                <th>Offered Treatment</th>
-                <th>Surgery Type</th>
-              </tr>
-            </thead>
-            <tbody>
-
-
-
-          {% for exa in examinations %}
-          <tr  onclick="window.document.location='{% url '#' patient.id %}';">
-              <td>{{ exa.id }}</td>
-              <td>{{ exa.date }}</td>
-              <td>{{ exa.offered_treatment}}</td>
-              <td>{{ exa.information }}</td>
-            </tr>
-          {% endfor %}
-
-
-            </tbody>
-          </table>
-        </div>
-        {% endif %}
-
-
-    <br/>
-    <br/>
-
-      <div class="col-sm-9"></div>
-      <div class="col-sm-3" align="right">
-            {% if examination %}
             <button type="button" class="btn btn-danger btn-sm">Discard</button>
-        <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+            <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
 
-            {% else %}
+        {% else %}
             <button type="submit" class="btn btn-default btn-sm">Save</button>
-            {% endif %}
+        {% endif %}
     </div>
 
     <br/>
     <br/>
     <br/>
-        </form>
+    </form>
 
-    </div>
+</div>
 </body>
 </html>

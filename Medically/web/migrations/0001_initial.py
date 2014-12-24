@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(unique=True, max_length=255, verbose_name=b'email address')),
                 ('full_name', models.CharField(max_length=50, verbose_name=b'Name & Surname')),
                 ('title', models.CharField(max_length=50, verbose_name=b'Title', choices=[(b'D', b'Dr.'), (b'P', b'Prof. Dr.'), (b'A', b'Asst. Prof.'), (b'C', b'Assoc. Prof')])),
-                ('institution', models.CharField(max_length=50, verbose_name=b'Title')),
+                ('institution', models.CharField(max_length=50, verbose_name=b'Institution')),
                 ('activation_key', models.CharField(max_length=40, blank=True)),
                 ('activation_expire_date', models.DateTimeField()),
                 ('is_active', models.BooleanField(default=True)),
@@ -73,7 +73,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='examination',
             name='patient',
-            field=models.ForeignKey(to='MedicallyWeb.Patient'),
+            field=models.ForeignKey(to='web.Patient'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='doctor',
+            name='examinations',
+            field=models.ManyToManyField(to='web.Examination'),
             preserve_default=True,
         ),
         migrations.RunPython(load_super_users, reverse_code=unload_super_users),

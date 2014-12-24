@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'MedicallyWeb',
+    'web',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -49,11 +49,11 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'Medically.urls'
+ROOT_URLCONF = 'medically.urls'
 
 WSGI_APPLICATION = 'Medically.wsgi.application'
 
-AUTH_USER_MODEL = 'MedicallyWeb.Doctor'
+AUTH_USER_MODEL = 'web.Doctor'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

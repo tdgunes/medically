@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from django.contrib import admin
 
-from models import Patient, Examination
+from .models import Patient, Examination
 
 
 class ExaminationInline(admin.StackedInline):

@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import django.utils.timezone
 
+from . import load_super_users, unload_super_users
 
 class Migration(migrations.Migration):
 
@@ -10,6 +12,25 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='Doctor',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('password', models.CharField(max_length=128, verbose_name='password')),
+                ('last_login', models.DateTimeField(default=django.utils.timezone.now, verbose_name='last login')),
+                ('email', models.EmailField(unique=True, max_length=255, verbose_name=b'email address')),
+                ('full_name', models.CharField(max_length=50, verbose_name=b'Name & Surname')),
+                ('title', models.CharField(max_length=50, verbose_name=b'Title', choices=[(b'D', b'Dr.'), (b'P', b'Prof. Dr.'), (b'A', b'Asst. Prof.'), (b'C', b'Assoc. Prof')])),
+                ('institution', models.CharField(max_length=50, verbose_name=b'Title')),
+                ('activation_key', models.CharField(max_length=40, blank=True)),
+                ('activation_expire_date', models.DateTimeField()),
+                ('is_active', models.BooleanField(default=True)),
+                ('is_admin', models.BooleanField(default=False)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
         migrations.CreateModel(
             name='Examination',
             fields=[
@@ -55,4 +76,5 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='MedicallyWeb.Patient'),
             preserve_default=True,
         ),
+        migrations.RunPython(load_super_users, reverse_code=unload_super_users),
     ]

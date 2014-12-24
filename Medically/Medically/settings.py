@@ -53,6 +53,7 @@ ROOT_URLCONF = 'Medically.urls'
 
 WSGI_APPLICATION = 'Medically.wsgi.application'
 
+AUTH_USER_MODEL = 'MedicallyWeb.Doctor'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

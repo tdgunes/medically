@@ -13,6 +13,36 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>
+        function handleFiles(files) {
+            $(document).ready(function(){
+                var dropbox = document.getElementById("drop_zone");
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    var imageType = /image.*/;
+
+                    if (!file.type.match(imageType)) {
+                        continue;
+                    }
+
+                    var img = document.createElement("img");
+                    img.classList.add("img-thumbnail");
+                    img.file = file;
+                    while (0 < dropbox.childNodes.length)
+                        dropbox.removeChild(dropbox.childNodes[0]);
+                    dropbox.appendChild(img);
+
+
+                    var reader = new FileReader();
+                    reader.onload = (function (aImg) {
+                        return function (e) {
+                            aImg.src = e.target.result;
+                        };
+                    })(img);
+                    reader.readAsDataURL(file);
+                }
+            })
+
+            }
         $(document).ready(function () {
 
             var dropbox;
@@ -21,6 +51,7 @@
             dropbox.addEventListener("dragover", dragover, false);
             dropbox.addEventListener("drop", drop, false);
             dropbox.addEventListener("click", click, false);
+
             function dragenter(e) {
                 e.stopPropagation();
                 e.preventDefault();
@@ -42,35 +73,11 @@
             }
 
             function click(e) {
+                $('#picture').click();
 
             }
 
-            function handleFiles(files) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    var imageType = /image.*/;
 
-                    if (!file.type.match(imageType)) {
-                        continue;
-                    }
-
-                    var img = document.createElement("img");
-                    img.classList.add("img-thumbnail");
-                    img.file = file;
-                    while (0 < dropbox.childNodes.length)
-                        console.log(dropbox.removeChild(dropbox.childNodes[0]));
-                    dropbox.appendChild(img);
-
-
-                    var reader = new FileReader();
-                    reader.onload = (function (aImg) {
-                        return function (e) {
-                            aImg.src = e.target.result;
-                        };
-                    })(img);
-                    reader.readAsDataURL(file);
-                }
-            }
         });
 
 
@@ -205,7 +212,7 @@
             </div>
         </div>
 </div>
-<input id="picture" class="hidden" type="file" name="picture">
+<input id="picture" class="hidden" type="file" name="picture" onchange="handleFiles(this.files)">
 
 <div class="row" id="second-row">
     <div class="col-md-7">

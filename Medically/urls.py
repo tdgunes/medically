@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from MedicallyWeb import views
+from web import views
 
 urlpatterns = patterns('',
     # Examples:

@@ -48,7 +48,10 @@ class DoctorManager(BaseUserManager):
 
 
 class Doctor(AbstractBaseUser):
+
     TITLES = (("D", "Dr.",), ("P", "Prof. Dr."), ("A", "Asst. Prof."), ("C", "Assoc. Prof"))
+
+    TITLES_DICT = {y:x for x,y in TITLES}
 
     email = models.EmailField(
         verbose_name='email address',

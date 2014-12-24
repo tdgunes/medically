@@ -1,8 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 
-# Register your models here.
-
-from django.contrib import admin
 
 from .models import Patient, Examination, Doctor
 
@@ -29,3 +27,5 @@ class PatientAdmin(admin.ModelAdmin):
 admin.site.register(Patient, PatientAdmin)
 admin.site.register(Examination, ExaminationAdmin)
 admin.site.register(Doctor)
+
+admin.site.unregister(Group)

@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web',
+    'djrill',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,7 +52,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'medically.urls'
 
-WSGI_APPLICATION = 'Medically.wsgi.application'
+WSGI_APPLICATION = 'medically.wsgi.application'
 
 AUTH_USER_MODEL = 'web.Doctor'
 
@@ -86,3 +87,7 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
+
+MANDRILL_API_KEY = "TCYeiMgZFHMJkt2buRFxKg"
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+DEFAULT_FROM_EMAIL = "info@luckyfriday.org"

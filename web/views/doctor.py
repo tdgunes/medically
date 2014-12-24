@@ -4,8 +4,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 
 
-from ..models import Patient
-
+from ..models import Patient, Doctor
+from ..forms import DoctorCreationFrom
+from ..utils import generate_token_with_email
 
 
 def profile_view(request):
@@ -43,4 +44,20 @@ def registration_view(request):
     if request.user.is_authenticated():
         return redirect("homepage")
     else:
-        return render(request, 'register.html')
+        if request.method == "POST":
+            form = DoctorCreationFrom(request.POST)
+            print form
+
+            title = Doctor.TITLES_DICT.get(request.POST["title"], None)
+            if form.errors or not title:
+                print form.errors
+                return render(request, 'register.html', dict(errors=form.errors))
+
+            doctor = form.save()
+            doctor.title = title
+            doctor.save()
+
+            print doctor
+            return redirect("homepage")
+        else:
+            return render(request, 'register.html')

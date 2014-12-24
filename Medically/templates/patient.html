@@ -292,7 +292,7 @@
         {% if examination %}
       <div class="form-group" >
           <label for="examination-table" style="font-size:1.5em">Examinations:
-              <button type="button" onClick="location.href='#'" class="btn btn-default btn-xs">New Examination</button>
+              <button type="button" onClick="location.href='{% url 'new_examination' patient.id %}'" class="btn btn-default btn-xs">New Examination</button>
           </label>
           <table class="table table-hover" id="examination-table">
             <thead>

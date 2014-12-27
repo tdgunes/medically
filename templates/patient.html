@@ -186,10 +186,10 @@
 
                     <div class="col-sm-10" id="gender-input">
                         <label class="radio-inline">
-                            {% if patient.gender == "F" %}
-                                <input type="radio" name="gender" id="female-input" value="F" checked=true> Female
-                            {% else %}
+                            {% if patient.gender == "M" %}
                                 <input type="radio" name="gender" id="female-input" value="F"> Female
+                            {% else %}
+                                <input type="radio" name="gender" id="female-input" value="F" checked=true> Female
                             {% endif %}
                         </label>
                         <label class="radio-inline">

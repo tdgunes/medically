@@ -50,6 +50,16 @@
         Your registration is successful. Please follow instructions from your email address.
     </div>
 {% endif %}
+{%  if success_register %}
+    <div class="alert alert-success" role="alert">
+        Your registration is successful. Please follow instructions from your email address.
+    </div>
+{% endif %}
+{%  if success_activation %}
+    <div class="alert alert-success" role="alert">
+        Your activation is successful. You can now login from below.
+    </div>
+{% endif %}
 <div class="jumbotron">
     <div class="container">
         <h1>Medically</h1>

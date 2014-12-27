@@ -66,7 +66,7 @@ To finish your signing up process,
 
 Please click the link below to activate your account:
 
-http://127.0.0.1/activate/{2}/
+http://127.0.0.1:8000/activate/{2}/
 
 Best Regards,
 Medically Team
@@ -75,8 +75,6 @@ Medically Team
             mail = EmailMessage(subject, body, "Medically <info@luckyfriday.org>", to=[doctor.email])
             mail.send(fail_silently=False)
 
-
-            print doctor
-            return redirect("homepage")
+            return custom_redirect("homepage", registration=True)
         else:
             return render(request, 'register.html')

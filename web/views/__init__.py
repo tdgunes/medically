@@ -7,7 +7,9 @@ from .doctor import profile_view, registration_view, login_main_page, logout_vie
 from .patient import new_patient_view, patient_view
 from .examination import new_examination_view
 
+
 def homepage(request):
+    print request.GET
     if request.method == "POST":
         if not request.user.is_authenticated():
             email = request.POST.get('email', None)
@@ -39,4 +41,4 @@ def homepage(request):
         if request.user.is_authenticated():
             return login_main_page(request, request.user)
         else:
-            return render(request, 'index.html', {"error": False, "error_message": ""})
+            return render(request, 'index.html', {"error": False, "error_message": "", "success_register": request.GET.get("registration")})

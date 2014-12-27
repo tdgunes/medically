@@ -21,7 +21,7 @@ def profile_view(request):
         if name and username and email:
             # TODO: must have title, institution, password, email, full_name as in registration
             print name, username, email
-            user_from_db = User.objects.get(username__exact=request.user.username)
+            user_from_db = Doctor.objects.get(username__exact=request.user.username)
             user_from_db.username = username
             user_from_db.email = email
             user_from_db.first_name = name

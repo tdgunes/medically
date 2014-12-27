@@ -19,7 +19,7 @@ class DoctorManager(BaseUserManager):
 
         doctor = self.model(
             email=self.normalize_email(email),
-            full_name=full_name,
+            full_name=full_name.title(),
             title=title,
             institution=institution,
             activation_key=generate_token_with_email(self.normalize_email(email)),
@@ -52,6 +52,8 @@ class Doctor(AbstractBaseUser):
     TITLES = (("D", "Dr.",), ("P", "Prof. Dr."), ("A", "Asst. Prof."), ("C", "Assoc. Prof"))
 
     TITLES_DICT = {y:x for x,y in TITLES}
+    TITLES_REVERSE_DICT = {x:y for x,y in TITLES}
+
 
     email = models.EmailField(
         verbose_name='email address',

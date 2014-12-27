@@ -2,7 +2,7 @@ __author__ = 'tdgunes'
 
 from django import forms
 from django.forms import ModelForm
-from .models import Doctor, Patient
+from .models import Doctor, Patient, Examination
 from .utils import generate_token_with_email
 import pytz
 import datetime
@@ -32,3 +32,8 @@ class PatientForm(ModelForm):
     class Meta:
         model = Patient
         localized_fields = ('born_date',)
+
+
+class ExaminationForm(ModelForm):
+    class Meta:
+        model = Examination

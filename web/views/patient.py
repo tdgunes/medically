@@ -6,14 +6,15 @@ from django.forms import ModelForm
 from ..models import Patient
 from ..forms import PatientForm
 
+
 def get_name(user):
     return user.full_name
+
 
 def new_patient_view(request):
     if not request.user.is_authenticated():
         return redirect("homepage")
     else:
-        full_name = get_name(request.user)
         return render(request, 'patient.html',
                       {"user": request.user, "full_name": get_name(request.user)})
 
@@ -28,12 +29,12 @@ def patient_view(request, patient_id):
             form = PatientForm(request.POST, instance=p)
             if form.is_valid():
                 form.save()
-                print "ss"
                 return redirect("patient_view", patient_id)
             else:
                 return render(request, 'patient.html',
-                      {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True,
-                       "examinations": p.examination_set.all(),"errors":form.errors})
+                              {"user": request.user, "full_name": get_name(request.user), "patient": p,
+                               "examination": True,
+                               "examinations": p.examination_set.all(), "errors": form.errors})
 
         return render(request, 'patient.html',
                       {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True,

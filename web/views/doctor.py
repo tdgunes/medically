@@ -6,7 +6,7 @@ from django.core.mail import EmailMessage
 
 from ..models import Patient, Doctor
 from ..forms import DoctorCreationForm
-from ..utils import generate_token_with_email
+from ..utils import generate_token_with_email, custom_redirect
 
 
 def profile_view(request):

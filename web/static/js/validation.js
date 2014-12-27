@@ -17,7 +17,7 @@ function checkForm(mandatoryFields,button){
 
 function validate(mandatoryFields, button){
     $(document).ready(function(){
-        disable(button)
+        checkForm(mandatoryFields, button)
         for(var i=0;i<mandatoryFields.length;i++){
             mandatoryFields[i].change(function() {
                 checkForm(mandatoryFields,button)

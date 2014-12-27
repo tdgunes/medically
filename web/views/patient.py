@@ -2,16 +2,12 @@ __author__ = 'tdgunes'
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from web.models import Patient
 from django.forms import ModelForm
+from ..models import Patient
+from ..forms import PatientForm
 
 def get_name(user):
     return user.full_name
-
-class PatientForm(ModelForm):
-    class Meta:
-        model = Patient
-        localized_fields = ('born_date',)
 
 def new_patient_view(request):
     if not request.user.is_authenticated():

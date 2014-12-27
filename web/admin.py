@@ -18,8 +18,8 @@ class ExaminationAdmin(admin.ModelAdmin):
 
 class PatientAdmin(admin.ModelAdmin):
 
-    search_fields = ['name_surname']
-    list_display = ('name_surname', 'gender', 'city')
+    search_fields = ['full_name']
+    list_display = ('full_name', 'gender', 'city')
     list_filter = ['city']
     inlines = [ExaminationInline]
 

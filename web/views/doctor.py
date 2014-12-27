@@ -2,11 +2,34 @@ __author__ = 'tdgunes'
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from django.core.mail import EmailMessage
+
+from django.utils import timezone
 
 from ..models import Patient, Doctor
 from ..forms import DoctorCreationFrom
-from ..utils import generate_token_with_email, custom_redirect
+from ..utils import generate_token_with_email, custom_redirect, send_activation_mail, send_activation_successful_mail
+
+
+def activation(request, activation_key):
+    try:
+        doctor = Doctor.objects.get(activation_key=activation_key)
+    except Doctor.DoesNotExist:
+        return custom_redirect("homepage", activation_key_not_found=True)
+
+    if doctor.is_active is False:
+        if doctor.activation_expire_date < timezone.now():
+            doctor.activation_key = generate_token_with_mail(user.email)
+            doctor.save()
+            send_activation_mail(doctor)
+            return custom_redirect("homepage", success_activation=True)
+
+        doctor.is_active = True
+        doctor.save()
+        send_activation_successful_mail(doctor)
+
+        return custom_redirect("homepage", success_activation=True)
+    else:
+        return custom_redirect("homepage", already_activated=True)
 
 
 def profile_view(request):
@@ -55,25 +78,10 @@ def registration_view(request):
 
             doctor = form.save()
             doctor.title = title
+            doctor.is_active = False
             doctor.save()
 
-            subject = "Activate your Medically Account - Medically"
-            body = """Hello {0} {1},
-
-Thank you for signing up for Medically.
-
-To finish your signing up process,
-
-Please click the link below to activate your account:
-
-http://127.0.0.1:8000/activate/{2}/
-
-Best Regards,
-Medically Team
-            """.format(Doctor.TITLES_REVERSE_DICT[doctor.title], doctor.full_name, doctor.activation_key)
-
-            mail = EmailMessage(subject, body, "Medically <info@luckyfriday.org>", to=[doctor.email])
-            mail.send(fail_silently=False)
+            send_activation_mail(doctor)
 
             return custom_redirect("homepage", registration=True)
         else:

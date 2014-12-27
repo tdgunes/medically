@@ -45,12 +45,7 @@
 {% if error %}
     <div class="alert alert-danger" role="alert">{{ error_message }}</div>
 {% endif %}
-{%  if success_register %}
-    <div class="alert alert-success" role="alert">
-        Your registration is successful. Please follow instructions from your email address.
-    </div>
-{% endif %}
-{%  if success_register %}
+{%  if registration %}
     <div class="alert alert-success" role="alert">
         Your registration is successful. Please follow instructions from your email address.
     </div>
@@ -60,6 +55,18 @@
         Your activation is successful. You can now login from below.
     </div>
 {% endif %}
+
+{% if activation_key_not_found %}
+    <div class="alert alert-danger" role="alert">
+    Activation key that you tried is expired or not found.
+    </div>
+{% endif %}
+{% if already_activated %}
+    <div class="alert alert-warning" role="alert">
+    Your account is already activated. You can login from below.
+    </div>
+{% endif %}
+
 <div class="jumbotron">
     <div class="container">
         <h1>Medically</h1>

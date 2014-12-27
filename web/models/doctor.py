@@ -93,6 +93,10 @@ class Doctor(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+
+    def get_title(self):
+        return Doctor.TITLES_REVERSE_DICT[self.title]
+
     @property
     def is_staff(self):
         return self.is_admin

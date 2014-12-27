@@ -2,7 +2,7 @@ __author__ = 'tdgunes'
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-
+from django.core.mail import EmailMessage
 
 from ..models import Patient, Doctor
 from ..forms import DoctorCreationFrom
@@ -56,6 +56,25 @@ def registration_view(request):
             doctor = form.save()
             doctor.title = title
             doctor.save()
+
+            subject = "Activate your Medically Account - Medically"
+            body = """Hello {0} {1},
+
+Thank you for signing up for Medically.
+
+To finish your signing up process,
+
+Please click the link below to activate your account:
+
+http://127.0.0.1/activate/{2}/
+
+Best Regards,
+Medically Team
+            """.format(Doctor.TITLES_REVERSE_DICT[doctor.title], doctor.full_name, doctor.activation_key)
+
+            mail = EmailMessage(subject, body, "Medically <info@luckyfriday.org>", to=[doctor.email])
+            mail.send(fail_silently=False)
+
 
             print doctor
             return redirect("homepage")

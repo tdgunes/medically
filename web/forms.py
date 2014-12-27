@@ -8,7 +8,7 @@ import pytz
 import datetime
 
 
-class DoctorCreationFrom(forms.ModelForm):
+class DoctorCreationForm(forms.ModelForm):
     password = forms.CharField(label='Password')
 
     class Meta:
@@ -17,7 +17,7 @@ class DoctorCreationFrom(forms.ModelForm):
 
 
     def save(self, commit=True):
-        doctor = super(DoctorCreationFrom, self).save(commit=False)
+        doctor = super(DoctorCreationForm, self).save(commit=False)
 
         doctor.set_password(self.cleaned_data["password"])
         doctor.activation_key = generate_token_with_email(self.cleaned_data["email"])

@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.utils import timezone
 
 from ..models import Patient, Doctor
-from ..forms import DoctorCreationFrom
+from ..forms import DoctorCreationForm
 from ..utils import generate_token_with_email, custom_redirect, send_activation_mail, send_activation_successful_mail
 
 
@@ -68,7 +68,7 @@ def registration_view(request):
         return redirect("homepage")
     else:
         if request.method == "POST":
-            form = DoctorCreationFrom(request.POST)
+            form = DoctorCreationForm(request.POST)
             print form
 
             title = Doctor.TITLES_DICT.get(request.POST["title"], None)

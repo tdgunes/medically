@@ -3,7 +3,7 @@ __author__ = 'tdgunes'
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 
-from .doctor import profile_view, registration_view, login_main_page, logout_view
+from .doctor import profile_view, registration_view, login_main_page, logout_view, activation
 from .patient import new_patient_view, patient_view
 from .examination import new_examination_view
 
@@ -41,4 +41,8 @@ def homepage(request):
         if request.user.is_authenticated():
             return login_main_page(request, request.user)
         else:
-            return render(request, 'index.html', {"error": False, "error_message": "", "success_register": request.GET.get("registration")})
+            d = {"error": False, "error_message": ""}
+
+            for k in request.GET.keys():
+                d[k] = request.GET[k]
+            return render(request, 'index.html', d)

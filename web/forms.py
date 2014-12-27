@@ -31,4 +31,4 @@ class DoctorCreationForm(forms.ModelForm):
 class PatientForm(ModelForm):
     class Meta:
         model = Patient
-        localized_fields = ('born_date',)
+        localized_fields = ('date_of_birth',)

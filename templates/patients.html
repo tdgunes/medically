@@ -64,14 +64,14 @@
         {% for patient in patients %}
             <tr onclick="window.document.location='{% url 'patient' patient.id %}';">
                 <td>{{ patient.id }}</td>
-                <td>{{ patient.name_surname }}</td>
+                <td>{{ patient.full_name }}</td>
                 {% if patient.gender == "M" %}
                     <td>Male</td>
                 {% else %}
                     <td>Female</td>
                 {% endif %}
                 <td>{{ patient.city }}</td>
-                <td>{{ patient.born_date }}</td>
+                <td>{{ patient.date_of_birth }}</td>
             </tr>
         {% endfor %}
 

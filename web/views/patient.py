@@ -14,7 +14,19 @@ def new_patient_view(request):
         return redirect("homepage")
     else:
         full_name = get_name(request.user)
-        return render(request, 'patient.html',
+        if request.method == "POST":
+            print request.POST
+            form = PatientForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect("homepage")
+
+
+            return render(request, 'patient.html',
+                      {"user": request.user, "full_name": get_name(request.user),"errors":form.errors})
+        else:
+
+            return render(request, 'patient.html',
                       {"user": request.user, "full_name": get_name(request.user)})
 
 
@@ -28,8 +40,8 @@ def patient_view(request, patient_id):
             form = PatientForm(request.POST, instance=p)
             if form.is_valid():
                 form.save()
-                print "ss"
-                return redirect("patient_view", patient_id)
+
+                return redirect("patient", patient_id)
             else:
                 return render(request, 'patient.html',
                       {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True,

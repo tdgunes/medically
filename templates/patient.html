@@ -3,7 +3,7 @@
 <head lang="en">
     <link style="text/css" rel="style" href="patient.css">
     <meta charset="UTF-8">
-    <title>Patients · {{ patient.name_surname }}</title>
+    <title>Patients · {{ patient.full_name }}</title>
 
     {% load staticfiles %}
 
@@ -105,7 +105,7 @@
             {% if not examination %}
                 <li class="active"><a href="#">New Patient</a></li>
             {% else %}
-                <li class="active"><a href="#">{{ patient.name_surname }}</a></li>
+                <li class="active"><a href="#">{{ patient.full_name }}</a></li>
             {% endif %}
         </ul>
 
@@ -144,8 +144,8 @@
                     <label for="name-input" class="col-sm-2 control-label">Full Name:</label>
 
                     <div class="col-sm-10">
-                        <input type="text" name="name_surname" class="form-control" id="name-input"
-                               placeholder="Full Name" value="{{ patient.name_surname }}">
+                        <input type="text" name="full_name" class="form-control" id="name-input"
+                               placeholder="Full Name" value="{{ patient.full_name }}">
                     </div>
                 </div>
 
@@ -176,8 +176,8 @@
                     <label for="bday-input" class="col-sm-2 control-label">Birthday:</label>
 
                     <div class="col-sm-10">
-                        <input type="date" class="form-control" id="bday-input" name="born_date" placeholder="Birthday"
-                               value="{{ patient.born_date.day }}/{{ patient.born_date.month }}/{{ patient.born_date.year }}">
+                        <input type="date" class="form-control" id="bday-input" name="date_of_birth" placeholder="Birthday"
+                               value="{{ patient.date_of_birth.day }}/{{ patient.date_of_birth.month }}/{{ patient.date_of_birth.year }}">
                     </div>
                 </div>
 

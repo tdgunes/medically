@@ -46,13 +46,15 @@
 <div class="container">
     <div class="row" id="first-row">
         <div class="col-md-12">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" method="post">
+                {% csrf_token %}
                 <div class="col-md-10">
                     <div class="form-group">
                         <label for="title-input" class="col-sm-3 control-label">Title:</label>
 
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="title-input" placeholder="Title" name="title">
+                            <input type="text" class="form-control" id="title-input" placeholder="Title" name="title"
+                                   value="{{ examination.title }}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -60,7 +62,7 @@
 
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="exam-date-input" placeholder="Examination Date"
-                               name="date">
+                               name="date" value="{{ examination.date }}">
                     </div>
                     <div class="col-sm-3"></div>
                 </div>
@@ -70,7 +72,8 @@
 
                     <div class="col-sm-9">
                         <textarea type="text" row="4" class="form-control" id="exam-info-input"
-                                  placeholder="Examination Info" style="resize:none;" name="information"></textarea>
+                                  placeholder="Examination Info" style="resize:none;"
+                                  name="information">{{ examination.information }}</textarea>
                     </div>
                 </div>
 
@@ -79,7 +82,8 @@
 
                     <div class="col-sm-9">
                         <textarea type="text" row="4" class="form-control" id="diagnosis-input"
-                                  placeholder="Diagnosis" style="resize:none;" name="diagnosis"></textarea>
+                                  placeholder="Diagnosis" style="resize:none;"
+                                  name="diagnosis">{{ examination.diagnosis }}</textarea>
                     </div>
                 </div>
 
@@ -88,7 +92,7 @@
 
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="treat-offer-input" placeholder="Treatment Offer"
-                               name="offered_treatment">
+                               name="offered_treatment" value="{{ examination.offered_treatment }}">
                     </div>
                 </div>
 
@@ -97,7 +101,7 @@
 
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="surgery-type-input" placeholder="Surgery Type"
-                               name="surgery_type">
+                               name="surgery_type" value="{{ examination.surgery_type }}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -105,7 +109,7 @@
 
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="surgery-date-input" placeholder="Appointment Date"
-                               name="surgery_date">
+                               name="surgery_date" value="{{ examination.surgery_date }}">
                     </div>
                 </div>
 
@@ -114,7 +118,8 @@
 
                     <div class="col-sm-9">
                         <textarea type="text" row="4" class="form-control" id="surgery-prep-input"
-                                  placeholder="Planning" style="resize:none;" name="surgery_prep"></textarea>
+                                  placeholder="Planning" style="resize:none;"
+                                  name="surgery_prep">{{ examination.surgery_prep }}</textarea>
                     </div>
                 </div>
                 </div>
@@ -122,7 +127,7 @@
                     <a href="#"><img class="img-thumbnail" src="{% static 'images/profile.jpg' %}"
                                      alt="..." id="profile-photo"></a>
                 </div>
-
+                {% if examination %}
                 <div class="form-group" style="clear: both">
                     <label for="surgery-table" style="font-size:1.5em">Surgeries:
                         <button type="button" onClick="location.href='#'"
@@ -168,6 +173,7 @@
                         </tbody>
                     </table>
                 </div>
+                {% endif %}
                 <div class="col-md-offset-9 col-md-3" align="right">
                     {% if examination %}
                         <button type="button" class="btn btn-danger btn-sm">Discard</button>

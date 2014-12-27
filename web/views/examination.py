@@ -20,12 +20,34 @@ def new_examination_view(request, patient_id):
                 return render(request, 'examination.html',
                               {"errors": form.errors, "user": request.user,
                                "full_name": request.user.full_name, "patient": patient})
-
-            examination = form.save()
+            examination = form.save(commit=False)
             examination.patient = patient
             examination.save()
-            return redirect("patient_view", patient_id)
+            return redirect("patient", patient_id)
         else:
             return render(request, 'examination.html',
                           {"user": request.user, "full_name": request.user.full_name, "patient": patient})
 
+
+def examination_view(request, patient_id, examination_id):
+    if not request.user.is_authenticated():
+        return redirect("homepage")
+    else:
+        patient = get_object_or_404(Patient, pk=patient_id)
+        examination = get_object_or_404(Examination, pk=examination_id)
+        if request.method == "POST":
+            form = ExaminationForm(request.POST, instance=examination)
+
+            if form.is_valid():
+                form.save()
+                return redirect("patient", patient_id)
+            else:
+                print form.errors
+                return render(request, 'examination.html',
+                              {"user": request.user, "full_name": request.user.full_name,
+                               "patient": patient, "examination": examination, "errors": form.errors})
+
+        else:
+            return render(request, 'examination.html',
+                          {"user": request.user, "full_name": request.user.full_name, "patient": patient,
+                           "examination": examination})

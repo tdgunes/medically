@@ -36,4 +36,6 @@ class PatientForm(ModelForm):
 
 class ExaminationForm(ModelForm):
     class Meta:
+        exclude = {'patient'}
         model = Examination
+

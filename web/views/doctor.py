@@ -6,7 +6,7 @@ from django.core.mail import EmailMessage
 
 from ..models import Patient, Doctor
 from ..forms import DoctorCreationFrom
-from ..utils import generate_token_with_email
+from ..utils import generate_token_with_email, custom_redirect
 
 
 def profile_view(request):
@@ -66,7 +66,7 @@ To finish your signing up process,
 
 Please click the link below to activate your account:
 
-http://127.0.0.1/activate/{2}/
+http://127.0.0.1:8000/activate/{2}/
 
 Best Regards,
 Medically Team
@@ -75,8 +75,6 @@ Medically Team
             mail = EmailMessage(subject, body, "Medically <info@luckyfriday.org>", to=[doctor.email])
             mail.send(fail_silently=False)
 
-
-            print doctor
-            return redirect("homepage")
+            return custom_redirect("homepage", registration=True)
         else:
             return render(request, 'register.html')

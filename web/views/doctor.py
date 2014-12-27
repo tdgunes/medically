@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.mail import EmailMessage
 
 from ..models import Patient, Doctor
-from ..forms import DoctorCreationFrom
+from ..forms import DoctorCreationForm
 from ..utils import generate_token_with_email
 
 
@@ -45,7 +45,7 @@ def registration_view(request):
         return redirect("homepage")
     else:
         if request.method == "POST":
-            form = DoctorCreationFrom(request.POST)
+            form = DoctorCreationForm(request.POST)
             print form
 
             title = Doctor.TITLES_DICT.get(request.POST["title"], None)

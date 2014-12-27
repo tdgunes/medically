@@ -3,10 +3,13 @@ function isValid(input){
     if(input.val() != "") return true
     else return false
 }
+function disable(button) {
+    button.attr("disabled", "disabled")
+}
 function checkForm(mandatoryFields,button){
     for(var i=0;i<mandatoryFields.length;i++)
         if(!isValid(mandatoryFields[i])) {
-            console.log((mandatoryFields[i]))
+            disable(button)
             return
         }
     button.removeAttr("disabled");
@@ -14,7 +17,7 @@ function checkForm(mandatoryFields,button){
 
 function validate(mandatoryFields, button){
     $(document).ready(function(){
-        button.attr("disabled", "disabled")
+        disable(button)
         for(var i=0;i<mandatoryFields.length;i++){
             mandatoryFields[i].change(function() {
                 checkForm(mandatoryFields,button)

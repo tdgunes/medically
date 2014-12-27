@@ -45,8 +45,9 @@
 
 <div class="container">
     <div class="row" id="first-row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <form class="form-horizontal" role="form">
+                <div class="col-md-10">
                 <div class="form-group">
                     <label for="exam-date-input" class="col-sm-3 control-label">Examination Date:</label>
 
@@ -105,64 +106,70 @@
                                   placeholder="Planning" style="resize:none;"></textarea>
                     </div>
                 </div>
+                </div>
+                <div class="col-md-2" id="exam-images">
+                    <a href="#"><img class="img-thumbnail" src="{% static 'images/profile.jpg' %}"
+                                     alt="..." id="profile-photo"></a>
+                </div>
 
+                <div class="form-group" style="clear: both">
+                    <label for="surgery-table" style="font-size:1.5em">Surgeries:
+                        <button type="button" onClick="location.href='#'"
+                                class="btn btn-default btn-xs">New Surgery
+                        </button>
+                    </label>
+                    <table class="table table-hover" id="surgery-table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Surgery Name</th>
+                            <th>Surgery Date</th>
+                            <th>Duration</th>
+                            <th>Complications</th>
+                            <th>Equipments</th>
+                            <th>Notes</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group">
+                    <label for="followup-table" style="font-size:1.5em">Follow-Up:
+                        <button type="button" onClick="location.href='#'"
+                                class="btn btn-default btn-xs">New Follow-Up
+                        </button>
+                    </label>
+                    <table class="table table-hover" id="followup-table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Follow-Up Date</th>
+                            <th>Appointment Date</th>
+                            <th>Informations</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-offset-9 col-md-3" align="right">
+                    {% if examination %}
+                        <button type="button" class="btn btn-danger btn-sm">Discard</button>
+                        <button type="submit" class="btn btn-success btn-sm" id="save-submit">Save Changes</button>
+
+                    {% else %}
+                        <button type="submit" class="btn btn-default btn-sm" id="save-submit">Save</button>
+                    {% endif %}
+                </div>
             </form>
-        </div>
-
-        <div class="col-md-2" id="exam-images">
-            <a href="#"><img class="img-thumbnail" src="{% static 'images/profile.jpg' %}"
-                             alt="..." id="profile-photo"></a>
         </div>
 
 
     </div>
-    <div class="form-group">
-            <label for="surgery-table" style="font-size:1.5em">Surgeries:
-                <button type="button" onClick="location.href='#'"
-                        class="btn btn-default btn-xs">New Surgery
-                </button>
-            </label>
-            <table class="table table-hover" id="surgery-table">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Surgery Name</th>
-                    <th>Surgery Date</th>
-                    <th>Duration</th>
-                    <th>Complications</th>
-                    <th>Equipments</th>
-                    <th>Notes</th>
-                </tr>
-                </thead>
-                <tbody>
-
-
-
-                </tbody>
-            </table>
-        </div>
-       <div class="form-group">
-            <label for="followup-table" style="font-size:1.5em">Follow-Up:
-                <button type="button" onClick="location.href='#'"
-                        class="btn btn-default btn-xs">New Follow-Up
-                </button>
-            </label>
-            <table class="table table-hover" id="followup-table">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Follow-Up Date</th>
-                    <th>Appointment Date</th>
-                    <th>Informations</th>
-                </tr>
-                </thead>
-                <tbody>
-
-
-
-                </tbody>
-            </table>
-        </div>
-</div>
 </body>
 </html>

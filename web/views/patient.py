@@ -44,8 +44,9 @@ def patient_view(request, patient_id):
                 return redirect("patient", patient_id)
             else:
                 return render(request, 'patient.html',
-                      {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True,
-                       "examinations": p.examination_set.all(),"errors":form.errors})
+                              {"user": request.user, "full_name": get_name(request.user), "patient": p,
+                               "examination": True,
+                               "examinations": p.examination_set.all(), "errors": form.errors})
 
         return render(request, 'patient.html',
                       {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True,

@@ -1,11 +1,12 @@
 #required {
-   content:"*";
-   color:red;
+    content:"*";
+    color:red;
+    display: inline;
 }
 
 
 .navbar{
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
 }
 .jumbotron{
     background-image: url("../images/background.jpg");

@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>{{ patient.name_surname }} · New Examination</title>
+    <title>{{ patient.full_name }} · New Examination</title>
 
     {% load staticfiles %}
 
@@ -34,7 +34,8 @@
 
     <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">{{ patient.name_surname }}</a></li>
+            <li class="active"><a href="{% url "patient" patient_id=patient.id  %}">{{ patient.full_name }}</a></li>
+            <li class="active"><a href="{% url 'examination' patient_id=patient.id examination_id=examination.id %}">{{ examination.title }}</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -50,14 +51,21 @@
     </div>
 </div>
 
+
+
 <div class="container">
     <div class="row" id="first-row">
         <div class="col-md-12">
             <form class="form-horizontal" role="form" method="post">
                 {% csrf_token %}
+
+
                 <div class="col-md-10">
+
+
+
                     <div class="form-group">
-                        <label for="title-input" class="col-sm-3 control-label">Title:</label>
+                        <label for="title-input" class="col-sm-3 control-label">Title: <label id="required">*</label></label>
 
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="title-input" placeholder="Title" name="title"
@@ -65,7 +73,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                    <label for="exam-date-input" class="col-sm-3 control-label">Examination Date:</label>
+                    <label for="exam-date-input" class="col-sm-3 control-label">Examination Date: <label id="required">*</label></label>
 
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="exam-date-input" placeholder="Examination Date"
@@ -130,10 +138,21 @@
                     </div>
                 </div>
                 </div>
-                <div class="col-md-2" id="exam-images">
-                    <a href="#"><img class="img-thumbnail" src="{% static 'images/profile.jpg' %}"
-                                     alt="..." id="profile-photo"></a>
+{#                <div class="col-md-2" id="exam-images">#}
+{#                    <a href="#"><img class="img-thumbnail" src="{% static 'images/profile.jpg' %}"#}
+{#                                     alt="..." id="profile-photo"></a>#}
+{#                </div>#}
+                <div class="col-md-offset-9 col-md-3" align="right">
+                    {% if examination %}
+                        <button type="button" class="btn btn-danger btn-sm">Discard</button>
+                        <button type="submit" class="btn btn-success btn-sm" id="save-submit">Save Changes</button>
+
+                    {% else %}
+                        <button type="submit" class="btn btn-default btn-sm" id="save-submit">Save</button>
+                    {% endif %}
                 </div>
+
+
                 {% if examination %}
                 <div class="form-group" style="clear: both">
                     <label for="surgery-table" style="font-size:1.5em">Surgeries:
@@ -181,15 +200,7 @@
                     </table>
                 </div>
                 {% endif %}
-                <div class="col-md-offset-9 col-md-3" align="right">
-                    {% if examination %}
-                        <button type="button" class="btn btn-danger btn-sm">Discard</button>
-                        <button type="submit" class="btn btn-success btn-sm" id="save-submit">Save Changes</button>
 
-                    {% else %}
-                        <button type="submit" class="btn btn-default btn-sm" id="save-submit">Save</button>
-                    {% endif %}
-                </div>
             </form>
         </div>
 

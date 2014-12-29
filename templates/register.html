@@ -51,74 +51,100 @@
     <div class="alert alert-danger" role="alert">{{ errors }}</div>
 {% endif %}
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <form class="form-horizontal profile" role="form" action="" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="title-input" class="col-sm-2 control-label" for="title">Title:</label>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="form-horizontal profile" role="form" action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title-input" class="col-sm-2 control-label" for="title">Title:</label>
 
-                <div class="col-sm-10">
-                    <select name="title" class="form-control" id="title-input">
-                        <option>Dr.</option>
-                        <option>Prof. Dr.</option>
-                        <option>Asst. Prof.</option>
-                        <option>Assoc. Prof</option>
-                    </select>
+                    <div class="col-sm-10">
+                        <select name="title" class="form-control" id="title-input">
+                            <option>Dr.</option>
+                            <option>Prof. Dr.</option>
+                            <option>Asst. Prof.</option>
+                            <option>Assoc. Prof</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="name-input" class="col-sm-2 control-label">Full Name:</label>
+                <div class="form-group">
+                    <label for="name-input" class="col-sm-2 control-label">Full Name:</label>
 
-                <div class="col-sm-10">
-                    <input type="text" name="full_name"  class="form-control" id="name-input" placeholder="Full Name">
+                    <div class="col-sm-10">
+                        <input type="text" name="full_name"  class="form-control" id="name-input" placeholder="Full Name">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="institution-input" class="col-sm-2 control-label">Institution:</label>
+                <div class="form-group">
+                    <label for="institution-input" class="col-sm-2 control-label">Institution:</label>
 
-                <div class="col-sm-10">
-                    <input type="text" name="institution" class="form-control" id="institution-input"
-                           placeholder="Institution">
+                    <div class="col-sm-10">
+                        <input type="text" name="institution" class="form-control" id="institution-input"
+                               placeholder="Institution">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="email-input" class="col-sm-2 control-label">Email:</label>
+                <div class="form-group">
+                    <label for="email-input" class="col-sm-2 control-label">Email:</label>
 
-                <div class="col-sm-10">
-                    <input type="text" name="email" class="form-control" id="email-input" placeholder="Email">
+                    <div class="col-sm-10">
+                        <input type="text" name="email" class="form-control" id="email-input" placeholder="Email">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="password-input" class="col-sm-2 control-label">Password: </label>
+                <div class="form-group">
+                    <label for="password-input" class="col-sm-2 control-label">Password: </label>
 
-                <div class="col-sm-10">
-                    <input type="password" name="password" class="form-control" id="password-input"
-                           placeholder="Password">
+                    <div class="col-sm-10">
+                        <input type="password" name="password" class="form-control" id="password-input"
+                               placeholder="Password">
+                    </div>
                 </div>
-            </div>
 
-
-            <div class="form-group">
+                <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-info" id="register-button">Register</button>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> I read Medically's EULA, I am accepting it.
+                    </label>
+                  </div>
                 </div>
-            </div>
-        </form>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-info" id="register-button">Register</button>
+                    </div>
+                </div>
+            </form>
 
 
+        </div>
     </div>
+
 </div>
+{#<hr id="bottom-line">#}
+{##}
+{#<footer>#}
+{##}
+{#    <p style="padding-right: 10px"><h6 style="padding-right: 10px">2014 © Medically </h6></p>#}
+{#</footer>#}
+{#</div>#}
 
-<hr>
+<footer class="footer">
+      <div class="container">
+{#        <p class="text-muted">#}
+          <ul class="list-inline text-muted">
 
-<footer>
-    <p>© Medically 2014</p>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Blog</a></li>
+              <li class="text-right" style="float:right;">2014 © Medically</li>
+            </ul>
+{#          </p>#}
+      </div>
 </footer>
-</div>
 
 </body>
 </html>

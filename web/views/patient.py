@@ -58,6 +58,20 @@ def patient_view(request, patient_id):
 
 
 def search_view(request):
-    print request.POST
-    patients = Patient.objects.all()
-    return render(request, 'patients.html', {"full_name": request.user.full_name, "patients": patients, "examination": False})
+    if request.method == "GET" or not request.user.is_authenticated():
+        return redirect("homepage")
+    else:
+        if len(request.POST["search"]) > 1:
+            patients = Patient.objects.filter(full_name__icontains=request.POST["search"])
+            if len(patients) > 0:
+                return render(request, 'patients.html', {"full_name": request.user.full_name,
+                                                     "patients": patients,
+                                                     "examination": False})
+            else:
+                return render(request, 'patients.html', {"full_name": request.user.full_name,
+                                                     "errors": "There is not any patient with this search term.",
+                                                     "examination": False})
+        else:
+            return render(request, 'patients.html', {"full_name": request.user.full_name,
+                                                     "errors": "Search term that you entered must be more than 1 character.",
+                                                     "examination": False})

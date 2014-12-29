@@ -28,20 +28,19 @@ class DoctorCreationForm(forms.ModelForm):
 
 
 class DoctorUpdateForm(forms.ModelForm):
-    password = forms.CharField(label='Password')
-
     class Meta:
         model = Doctor
         exclude = ('password',)
-        fields = ('email', 'password', 'full_name', 'institution',)
+        fields = ('email', 'full_name', 'institution',)
 
-class PatientForm(ModelForm):
+
+class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         localized_fields = ('date_of_birth',)
 
 
-class ExaminationForm(ModelForm):
+class ExaminationForm(forms.ModelForm):
     class Meta:
         exclude = {'patient'}
         model = Examination

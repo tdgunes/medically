@@ -39,18 +39,18 @@ def profile_view(request):
         if request.method == "POST":
             form = DoctorUpdateForm(request.POST, instance=request.user)
             title = Doctor.TITLES_DICT.get(request.POST["title"], None)
-            password = request.user.password
+            password = request.POST["password"]
             if form.errors or not title:
                 print form.errors
                 return render(request, 'register.html', dict(errors=form.errors))
-
             doctor = form.save(commit=False)
-            if (request.POST["password"] == ""):
-                doctor.password = password
+            if (password != ""):
+                print "Password changed"
+                doctor.set_password(password)
             doctor.title = title
             doctor.is_active = True
             doctor.save()
-            redirect("profile_view")
+            return redirect("profile_view")
         else:
             return render(request, 'profile.html', {"full_name": request.user.full_name})
 

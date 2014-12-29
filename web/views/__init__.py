@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from .doctor import profile_view, registration_view, login_main_page, logout_view, activation
 from .patient import new_patient_view, patient_view, search_view
 from .examination import new_examination_view, examination_view
-from .surgery import new_surgery_view
+from .surgery import new_surgery_view, surgery_view
 
 
 def homepage(request):

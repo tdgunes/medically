@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-
 import django.utils.timezone
 from . import load_super_users, unload_super_users
 
@@ -68,6 +67,22 @@ class Migration(migrations.Migration):
                 ('internal_business_phone', models.CharField(max_length=20, null=True, blank=True)),
                 ('social_security_number', models.CharField(max_length=100, null=True, verbose_name=b'Social Security Number', blank=True)),
                 ('photo', models.ImageField(null=True, upload_to=b'web/static/patient_photos/%Y/%m/%d/%h/', blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Surgery',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=200)),
+                ('date', models.DateField()),
+                ('notes', models.TextField(max_length=1000, null=True, blank=True)),
+                ('duration', models.CharField(max_length=40, null=True, blank=True)),
+                ('complications', models.CharField(max_length=200, null=True, blank=True)),
+                ('equipments', models.CharField(max_length=200, null=True, blank=True)),
+                ('examination', models.ForeignKey(to='web.Examination')),
             ],
             options={
             },

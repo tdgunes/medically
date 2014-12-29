@@ -53,18 +53,22 @@
         </ul>
     </div>
 </div>
+{% if errors %}
+    <div class="alert alert-danger" role="alert">{{ errors }}</div>
+{% endif %}
 
 <div class="container">
     <div class="row" id="first-row">
         <div class="col-md-10">
 
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" method="post">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="title-input" class="col-sm-3 control-label">Title:</label>
 
                     <div class="col-sm-9">
                     <input type="text" name="title" class="form-control" id="title-input"
-                               placeholder="Title">
+                           placeholder="Title" value="{{ surgery.title }}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -72,7 +76,7 @@
 
                     <div class="col-sm-9">
                         <input type="number" class="form-control" id="duration-input"
-                               placeholder="Duration" maxlength="11" name="duration">
+                               placeholder="Duration" maxlength="11" name="duration" value="{{ surgery.duration }}">
                     </div>
                 </div>
 
@@ -80,7 +84,8 @@
                     <label for="date-input" class="col-sm-3 control-label">Surgery Date:</label>
 
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="date-input" name="date" placeholder="Surgery Date">
+                        <input type="date" class="form-control" id="date-input" name="date"
+                               placeholder="Surgery Date" value="{{ surgery.date }}">
                     </div>
                     <div class="col-sm-5"></div>
                 </div>
@@ -89,7 +94,7 @@
 
                     <div class="col-sm-9">
                         <textarea type="text" row="4" class="form-control" name="notes" id="notes-input"
-                                  placeholder="Surgery Notes" style="resize:none;"></textarea>
+                                  placeholder="Surgery Notes" style="resize:none;">{{ surgery.notes }}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -97,7 +102,9 @@
 
                     <div class="col-sm-9">
                         <textarea type="text" row="4" class="form-control" id="complications-input"
-                                  placeholder="Complications" style="resize:none;" name="complications"></textarea>
+                                  placeholder="Complications" style="resize:none;" name="complications">
+                            {{ surgery.complications }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -105,11 +112,13 @@
 
                     <div class="col-sm-9">
                         <textarea type="text" row="4" class="form-control" id=equipments-input"
-                                  placeholder="Equipments" style="resize:none;" name="equipments"></textarea>
+                                  placeholder="Equipments" style="resize:none;" name="equipments">
+                            {{ surgery.equipments }}
+                        </textarea>
                     </div>
                 </div>
                 <div class="col-md-offset-9 col-md-3" align="right">
-                    {% if examination %}
+                    {% if surgery %}
                         <button type="button" class="btn btn-danger btn-sm">Discard</button>
                         <button type="submit" class="btn btn-success btn-sm" id="save-submit">Save Changes</button>
 

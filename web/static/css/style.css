@@ -1,40 +1,41 @@
 #required {
-   content:"*";
-   color:red;
+    content: "*";
+    color: red;
     display: inline;
 }
 
-
-.navbar{
+.navbar {
     margin-bottom: 50px;
 }
-.jumbotron{
+
+.jumbotron {
     background-image: url("../images/background.jpg");
 }
-.jumbotron .container h1{
+
+.jumbotron .container h1 {
     color: #abf2ff;
     text-shadow: 1px 3px 2px #000000;
 }
 
-.jumbotron .container p{
+.jumbotron .container p {
     color: whitesmoke;
     text-shadow: 1px 1px 2px #000000;
 }
 
-.jumbotron .container .control-label{
+.jumbotron .container .control-label {
     color: whitesmoke;
     text-shadow: 2px 2px 1px #000000;
 }
 
-input#inputEmail3.form-control{
+input#inputEmail3.form-control {
     width: 20em;
 }
 
-input#inputPassword3.form-control{
+input#inputPassword3.form-control {
     width: 20em;
 }
 
-.alert{
+.alert {
     margin-bottom: 0px;
 }
 
@@ -47,31 +48,33 @@ img.img-thumbnail.profile {
     width: 140px;
 }
 
-.form-horizontal{
+.form-horizontal {
 
     margin-left: 2em;
     margin-right: auto;
     float: none;
 }
+
 #exam-images {
-	overflow-y: visible;
+    overflow-y: visible;
 }
+
 #profile-photo {
-	width:140px;
-	height:140px;
-	margin-left:Auto;
-	margin-right:Auto;
-	margin-bottom:1em;
-	display:block;
+    width: 140px;
+    height: 140px;
+    margin-left: Auto;
+    margin-right: Auto;
+    margin-bottom: 1em;
+    display: block;
 }
 
 .container {
-	display:block;
-	margin-left:Auto;
-	margin-right:Auto;
-	font-family:Helvetica Neue,Helvetica,Myriad Pro;
-	font-size:0.8em;
-	text-align:left;
+    display: block;
+    margin-left: Auto;
+    margin-right: Auto;
+    font-family: Helvetica Neue, Helvetica, Myriad Pro;
+    font-size: 0.8em;
+    text-align: left;
 
 }
 

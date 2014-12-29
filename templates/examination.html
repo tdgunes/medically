@@ -176,17 +176,20 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Surgery Name</th>
-                            <th>Surgery Date</th>
-                            <th>Duration</th>
-                            <th>Complications</th>
-                            <th>Equipments</th>
+                            <th>Title</th>
+                            <th>Date</th>
                             <th>Notes</th>
                         </tr>
                         </thead>
                         <tbody>
-
-
+                        {% for surgery in surgeries %}
+                            <tr onclick="window.document.location='{% url 'surgery' patient_id=patient.id examination_id=examination.id surgery_id=surgery.id %}';">
+                                <td>{{ surgery.id }}</td>
+                                <td>{{ surgery.title }}</td>
+                                <td>{{ surgery.date }}</td>
+                                <td>{{ surgery.notes }}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

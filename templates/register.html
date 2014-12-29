@@ -17,7 +17,10 @@
         $(document).ready(function(){
             var mandatoryFields = [$("#name-input"),$("#institution-input"),$("#email-input"),$("#password-input")]
             var button = $("#register-button")
+            var email = $("#email-input")
+            var emailSymbol = $("#email-symbol")
             validate(mandatoryFields,button)
+            validateEmail(email, emailSymbol)
         })
     </script>
 </head>
@@ -84,11 +87,13 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group has-feedback">
                 <label for="email-input" class="col-sm-2 control-label">Email:</label>
 
                 <div class="col-sm-10">
-                    <input type="text" name="email" class="form-control" id="email-input" placeholder="Email">
+                    <input type="text" name="email" class="form-control" id="email-input" placeholder="Email"
+                           aria-describedby="inputSuccess2Status">
+                    <span class="glyphicon form-control-feedback" aria-hidden="true" id="email-symbol"></span>
                 </div>
             </div>
 

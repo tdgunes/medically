@@ -7,7 +7,7 @@ from . import Patient
 class Examination(models.Model):
 
     patient = models.ForeignKey(Patient)
-    title = models.CharField("Title", max_length=20, null=False, default="blank")
+    title = models.CharField("Title", max_length=100, null=False, default="blank")
     date = models.DateField("Examination Date", null=False)
     information = models.CharField("Examination Information", max_length=1000, null=True, blank=True)
     diagnosis = models.CharField("Diagnosis", max_length=1000, null=True, blank=True)

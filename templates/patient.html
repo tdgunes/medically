@@ -128,14 +128,18 @@
 
 <div class="container">
 <div class="row" id="first-row">
-    <form class="form-horizontal" action="" method="post">
+    <form class="form-horizontal" action="" method="post", enctype="multipart/form-data">
         {% csrf_token %}
         <div class="col-md-2">
             <div id="drop_zone">
+                {% if photo_url  %}
+                <img class="img-thumbnail" src="{% static photo_url %}" alt="..." id="profile-photo">
+                {% else %}
                 <img class="img-thumbnail" src="{% static 'images/profile.jpg' %}" alt="..." id="profile-photo">
+                {% endif %}
             </div>
 
-            <input type="file" id="files" class="hidden" name="files[]" accept="image/*">
+            <input type="file" id="files" class="hidden" name="photo" accept="image/*">
         </div>
 
         <div class="col-md-5">
@@ -215,7 +219,7 @@
             </div>
         </div>
 </div>
-<input id="picture" class="hidden" type="file" name="picture" onchange="handleFiles(this.files)">
+<input id="picture" class="hidden" type="file" name="photo" onchange="handleFiles(this.files)">
 
 <div class="row" id="second-row">
     <div class="col-md-7">

@@ -25,7 +25,7 @@ class Patient(models.Model):
     business_phone = models.CharField(max_length=20, null=True, blank=True)
     internal_business_phone = models.CharField(max_length=20, null=True, blank=True)
     social_security_number = models.CharField("Social Security Number", max_length=100, null=True, blank=True)
-    photo = models.ImageField(upload_to='patient_photos/', null=True, blank=True)
+    photo = models.ImageField(upload_to='web/static/patient_photos/%Y/%m/%d/%h/', null=True, blank=True)
 
     def __unicode__(self):
         return self.full_name

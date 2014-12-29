@@ -16,7 +16,7 @@ def new_patient_view(request):
         full_name = get_name(request.user)
         if request.method == "POST":
             print request.POST
-            form = PatientForm(request.POST)
+            form = PatientForm(request.POST,request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect("homepage")
@@ -35,20 +35,23 @@ def patient_view(request, patient_id):
         return redirect("homepage")
     else:
         p = get_object_or_404(Patient, pk=patient_id)
-
+        photo_url = "/".join(str(p.photo).split("/")[2:])
+        print p.photo
         if request.method == "POST":
-            form = PatientForm(request.POST, instance=p)
+            print request.FILES
+            form = PatientForm(request.POST, request.FILES, instance=p)
             if form.is_valid():
                 form.save()
 
                 return redirect("patient", patient_id)
             else:
+
                 return render(request, 'patient.html',
                               {"user": request.user, "full_name": get_name(request.user), "patient": p,
-                               "examination": True,
+                               "examination": True, "photo_url":photo_url,
                                "examinations": p.examination_set.all(), "errors": form.errors})
 
         return render(request, 'patient.html',
-                      {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True,
+                      {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True, "photo_url":photo_url,
                        "examinations": p.examination_set.all()})
 

@@ -95,35 +95,59 @@
                            aria-describedby="inputSuccess2Status">
                     <span class="glyphicon form-control-feedback" aria-hidden="true" id="email-symbol"></span>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label for="password-input" class="col-sm-2 control-label">Password: </label>
+                <div class="form-group">
+                    <label for="password-input" class="col-sm-2 control-label">Password: </label>
 
-                <div class="col-sm-10">
-                    <input type="password" name="password" class="form-control" id="password-input"
-                           placeholder="Password">
+                    <div class="col-sm-10">
+                        <input type="password" name="password" class="form-control" id="password-input"
+                               placeholder="Password">
+                    </div>
                 </div>
-            </div>
 
-
-            <div class="form-group">
+                <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-info" id="register-button">Register</button>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> I read Medically's EULA, I am accepting it.
+                    </label>
+                  </div>
                 </div>
-            </div>
-        </form>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-info" id="register-button">Register</button>
+                    </div>
+                </div>
+            </form>
 
 
+        </div>
     </div>
+
 </div>
+{#<hr id="bottom-line">#}
+{##}
+{#<footer>#}
+{##}
+{#    <p style="padding-right: 10px"><h6 style="padding-right: 10px">2014 © Medically </h6></p>#}
+{#</footer>#}
+{#</div>#}
 
-<hr>
+<footer class="footer">
+      <div class="container">
+{#        <p class="text-muted">#}
+          <ul class="list-inline text-muted">
 
-<footer>
-    <p>© Medically 2014</p>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Blog</a></li>
+              <li class="text-right" style="float:right;">2014 © Medically</li>
+            </ul>
+{#          </p>#}
+      </div>
 </footer>
-</div>
 
 </body>
 </html>

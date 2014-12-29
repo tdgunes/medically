@@ -24,16 +24,24 @@ class DoctorCreationForm(forms.ModelForm):
         doctor.activation_expire_date = datetime.datetime.now(pytz.utc) + datetime.timedelta(2)
         if commit:
             doctor.save()
-
         return doctor
 
 
-class PatientForm(ModelForm):
+class DoctorUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Doctor
+        exclude = ('password',)
+        fields = ('email', 'full_name', 'institution',)
+
+
+class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         localized_fields = ('date_of_birth',)
 
 
-class ExaminationForm(ModelForm):
+class ExaminationForm(forms.ModelForm):
     class Meta:
+        exclude = {'patient'}
         model = Examination
+

@@ -2,9 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from . import load_super_users, unload_super_users
 
 import django.utils.timezone
+from . import load_super_users, unload_super_users
 
 
 class Migration(migrations.Migration):
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
             name='Examination',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('title', models.CharField(default=b'blank', max_length=20, verbose_name=b'Title')),
+                ('title', models.CharField(default=b'blank', max_length=100, verbose_name=b'Title')),
                 ('date', models.DateField(verbose_name=b'Examination Date')),
                 ('information', models.CharField(max_length=1000, null=True, verbose_name=b'Examination Information', blank=True)),
                 ('diagnosis', models.CharField(max_length=1000, null=True, verbose_name=b'Diagnosis', blank=True)),

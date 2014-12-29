@@ -54,6 +54,9 @@
     </div>
 </div>
 
+{% if errors %}
+    <div class="alert alert-danger" role="alert">{{ errors }}</div>
+{% endif %}
 
 
 <div class="container">
@@ -80,7 +83,7 @@
 
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="exam-date-input" placeholder="Examination Date"
-                               name="date" value="{{ examination.date }}">
+                               name="date" value="{{ examination.date.day }}/{{ examination.date.month }}/{{ examination.date.year }}">
                     </div>
                     <div class="col-sm-3"></div>
                 </div>
@@ -126,8 +129,13 @@
                     <label for="surgery-date-input" class="col-sm-3 control-label">Surgery Date:</label>
 
                     <div class="col-sm-3">
+                        {%  if examination.surgery_date %}
                         <input type="date" class="form-control" id="surgery-date-input" placeholder="Appointment Date"
                                name="surgery_date" value="{{ examination.surgery_date }}">
+                        {% else %}
+                        <input type="date" class="form-control" id="surgery-date-input" placeholder="Appointment Date"
+                               name="surgery_date" value="">
+                        {% endif %}
                     </div>
                 </div>
 

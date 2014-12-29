@@ -6,8 +6,10 @@ from django.forms import ModelForm
 from ..models import Patient
 from ..forms import PatientForm
 
+
 def get_name(user):
     return user.full_name
+
 
 def new_patient_view(request):
     if not request.user.is_authenticated():
@@ -16,18 +18,16 @@ def new_patient_view(request):
         full_name = get_name(request.user)
         if request.method == "POST":
             print request.POST
-            form = PatientForm(request.POST,request.FILES)
+            form = PatientForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
                 return redirect("homepage")
-
-
             return render(request, 'patient.html',
-                      {"user": request.user, "full_name": get_name(request.user),"errors":form.errors})
+                          {"user": request.user, "full_name": get_name(request.user), "errors": form.errors})
         else:
 
             return render(request, 'patient.html',
-                      {"user": request.user, "full_name": get_name(request.user)})
+                          {"user": request.user, "full_name": get_name(request.user)})
 
 
 def patient_view(request, patient_id):
@@ -48,10 +48,11 @@ def patient_view(request, patient_id):
 
                 return render(request, 'patient.html',
                               {"user": request.user, "full_name": get_name(request.user), "patient": p,
-                               "examination": True, "photo_url":photo_url,
+                               "examination": True, "photo_url": photo_url,
                                "examinations": p.examination_set.all(), "errors": form.errors})
 
         return render(request, 'patient.html',
-                      {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True, "photo_url":photo_url,
+                      {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True,
+                       "photo_url": photo_url,
                        "examinations": p.examination_set.all()})
 

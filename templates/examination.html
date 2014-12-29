@@ -34,8 +34,11 @@
 
     <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="{% url "patient" patient_id=patient.id  %}">{{ patient.full_name }}</a></li>
-            <li class="active"><a href="{% url 'examination' patient_id=patient.id examination_id=examination.id %}">{{ examination.title }}</a></li>
+            <li class="active"><a href="{% url 'patient' patient_id=patient.id %}">{{ patient.full_name }}</a></li>
+            {% if examination %}
+                <li class="active">
+                <a href="{% url 'examination' patient_id=patient.id examination_id=examination.id %}">{{ examination.title }}</a>
+                </li>{% endif %}
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -156,7 +159,8 @@
                 {% if examination %}
                 <div class="form-group" style="clear: both">
                     <label for="surgery-table" style="font-size:1.5em">Surgeries:
-                        <button type="button" onClick="location.href='#'"
+                        <button type="button"
+                                onClick="location.href='{% url 'new_surgery' patient_id=patient.id examination_id=examination.id %}'"
                                 class="btn btn-default btn-xs">New Surgery
                         </button>
                     </label>

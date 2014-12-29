@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from .doctor import profile_view, registration_view, login_main_page, logout_view, activation
 from .patient import new_patient_view, patient_view
 from .examination import new_examination_view, examination_view
+from .surgery import new_surgery_view
 
 
 def homepage(request):
@@ -34,7 +35,8 @@ def homepage(request):
                     return render(request, 'index.html',
                                   {"error": True, "error_message": "Wrong credentials, try again!"})
             else:
-                return render(request, 'index.html', {"error": True, "error_message": "Missing credentials, try again!"})
+                return render(request, 'index.html',
+                              {"error": True, "error_message": "Missing credentials, try again!"})
         else:
             return login_main_page(request, request.user)
     else:

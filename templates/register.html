@@ -19,8 +19,10 @@
             var button = $("#register-button")
             var email = $("#email-input")
             var emailSymbol = $("#email-symbol")
+            var checkbox = $("#eula")
             validate(mandatoryFields,button)
             validateEmail(email, emailSymbol)
+            validateCheckbox(checkbox)
         })
     </script>
 </head>
@@ -109,7 +111,7 @@
                 <div class="col-sm-offset-2 col-sm-10">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox"> I read Medically's EULA, I am accepting it.
+                        <input type="checkbox" id="eula"> I read Medically's EULA, I am accepting it.
                     </label>
                   </div>
                 </div>

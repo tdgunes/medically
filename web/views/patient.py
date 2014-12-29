@@ -55,3 +55,8 @@ def patient_view(request, patient_id):
                       {"user": request.user, "full_name": get_name(request.user), "patient": p, "examination": True, "photo_url":photo_url,
                        "examinations": p.examination_set.all()})
 
+
+def search_view(request):
+    print request.POST
+    patients = Patient.objects.all()
+    return render(request, 'patients.html', {"full_name": request.user.full_name, "patients": patients, "examination": False})

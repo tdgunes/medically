@@ -2,9 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from . import load_super_users, unload_super_users
+
 import django.utils.timezone
 
-from . import load_super_users, unload_super_users
 
 class Migration(migrations.Migration):
 
@@ -35,12 +36,14 @@ class Migration(migrations.Migration):
             name='Examination',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(default=b'blank', max_length=20, verbose_name=b'Title')),
                 ('date', models.DateField(verbose_name=b'Examination Date')),
-                ('information', models.TextField(max_length=1000, verbose_name=b'Examination Information')),
-                ('observation', models.TextField(max_length=1000, verbose_name=b'Observation')),
-                ('offered_treatment', models.CharField(max_length=20, verbose_name=b'Offered Treatment', choices=[(b'Surgery', b'Surgery'), (b'Conservative', b'Conservative')])),
-                ('surgery_type', models.CharField(max_length=20, null=True, verbose_name=b'Offered Treatment')),
-                ('planned_surgery_date', models.DateField(null=True)),
+                ('information', models.CharField(max_length=1000, null=True, verbose_name=b'Examination Information', blank=True)),
+                ('diagnosis', models.CharField(max_length=1000, null=True, verbose_name=b'Diagnosis', blank=True)),
+                ('offered_treatment', models.CharField(max_length=20, null=True, verbose_name=b'Offered Treatment', blank=True)),
+                ('surgery_type', models.CharField(max_length=20, null=True, verbose_name=b'Surgery Type', blank=True)),
+                ('surgery_date', models.DateField(null=True, verbose_name=b'Surgery Date', blank=True)),
+                ('surgery_prep', models.CharField(max_length=1000, null=True, verbose_name=b'Surgery Preparation', blank=True)),
             ],
             options={
             },
@@ -50,21 +53,21 @@ class Migration(migrations.Migration):
             name='Patient',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name_surname', models.CharField(max_length=50, verbose_name=b'Name & Surname')),
-                ('born_date', models.DateField(verbose_name=b'Date Born')),
-                ('gender', models.CharField(max_length=1, choices=[(b'M', b'Male'), (b'F', b'Female')])),
-                ('address', models.CharField(max_length=200)),
-                ('town', models.CharField(max_length=40)),
+                ('full_name', models.CharField(max_length=50, verbose_name=b'Name & Surname')),
                 ('city', models.CharField(max_length=40)),
-                ('country', models.CharField(max_length=40)),
-                ('home_phone', models.CharField(max_length=20)),
-                ('business_phone', models.CharField(max_length=20)),
-                ('internal_business_phone', models.CharField(max_length=20)),
-                ('mobile_phone', models.CharField(max_length=20)),
-                ('email', models.EmailField(max_length=75)),
-                ('picture', models.ImageField(upload_to=b'patient_photos/')),
-                ('description', models.TextField(max_length=1000)),
-                ('social_security_number', models.CharField(max_length=100, verbose_name=b'Social Security Number')),
+                ('date_of_birth', models.DateField(verbose_name=b'Date Born')),
+                ('gender', models.CharField(max_length=1, choices=[(b'M', b'Male'), (b'F', b'Female')])),
+                ('email', models.EmailField(max_length=75, null=True, blank=True)),
+                ('town', models.CharField(max_length=40, null=True, blank=True)),
+                ('country', models.CharField(max_length=40, null=True, blank=True)),
+                ('address', models.CharField(max_length=200, null=True, blank=True)),
+                ('description', models.TextField(max_length=1000, null=True, blank=True)),
+                ('mobile_phone', models.CharField(max_length=20, null=True, blank=True)),
+                ('home_phone', models.CharField(max_length=20, null=True, blank=True)),
+                ('business_phone', models.CharField(max_length=20, null=True, blank=True)),
+                ('internal_business_phone', models.CharField(max_length=20, null=True, blank=True)),
+                ('social_security_number', models.CharField(max_length=100, null=True, verbose_name=b'Social Security Number', blank=True)),
+                ('photo', models.ImageField(null=True, upload_to=b'web/static/patient_photos/%Y/%m/%d/%h/', blank=True)),
             ],
             options={
             },

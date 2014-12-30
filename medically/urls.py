@@ -28,5 +28,10 @@ urlpatterns = patterns('',
     url(r'^(?P<patient_id>\d+)/examination/(?P<examination_id>\d+)/surgery/(?P<surgery_id>\d+)/$',
         views.surgery_view, name='surgery'),
 
+    # Followup component related URLs
+    url(r'^(?P<patient_id>\d+)/examination/(?P<examination_id>\d+)/new_followup/$',
+        views.new_followup_view, name='new_followup'),
+    url(r'^(?P<patient_id>\d+)/examination/(?P<examination_id>\d+)/followup/(?P<followup_id>\d+)/$',
+        views.followup_view, name='followup'),
 
 )

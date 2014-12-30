@@ -50,4 +50,5 @@ def examination_view(request, patient_id, examination_id):
         else:
             return render(request, 'examination.html',
                           {"user": request.user, "full_name": request.user.full_name, "patient": patient,
-                           "examination": examination, "surgeries": examination.surgery_set.all()})
+                           "examination": examination, "surgeries": examination.surgery_set.all(),
+                           "followups": examination.followup_set.all()})

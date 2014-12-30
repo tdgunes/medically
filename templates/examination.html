@@ -195,7 +195,8 @@
                 </div>
                 <div class="form-group">
                     <label for="followup-table" style="font-size:1.5em">Follow-Up:
-                        <button type="button" onClick="location.href='#'"
+                        <button type="button"
+                                onClick="location.href='{% url 'new_followup' patient_id=patient.id examination_id=examination.id %}'"
                                 class="btn btn-default btn-xs">New Follow-Up
                         </button>
                     </label>
@@ -209,8 +210,14 @@
                         </tr>
                         </thead>
                         <tbody>
-
-
+                        {% for followup in followups %}
+                            <tr onclick="window.document.location='{% url 'followup' patient_id=patient.id examination_id=examination.id followup_id=followup.id %}';">
+                                <td>{{ followup.id }}</td>
+                                <td>{{ followup.date }}</td>
+                                <td>{{ followup.appointment_date }}</td>
+                                <td>{{ followup.information }}</td>
+                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

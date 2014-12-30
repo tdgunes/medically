@@ -2,7 +2,7 @@ __author__ = 'tdgunes'
 
 from django import forms
 from django.forms import ModelForm
-from .models import Doctor, Patient, Examination, Surgery
+from .models import Doctor, Patient, Examination, Surgery, Followup
 from .utils import generate_token_with_email
 import pytz
 import datetime
@@ -49,4 +49,10 @@ class ExaminationForm(forms.ModelForm):
 class SurgeryForm(forms.ModelForm):
     class Meta:
         model = Surgery
+        exclude = {'examination'}
+
+
+class FollowupForm(forms.ModelForm):
+    class Meta:
+        model = Followup
         exclude = {'examination'}

@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>/_Name_Surname · New Follow-Up</title>
+    <title>{{ full_name }} · New Follow-Up</title>
 
     {% load staticfiles %}
 
@@ -27,12 +27,12 @@
 
     <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">/_Name_surname</a></li>
+            <li class="active"><a href="#">{{ full_name }}</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> /_Full_name <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ full_name }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'profile_view' %}">Profile</a></li>
                     <li class="divider"></li>
@@ -46,12 +46,14 @@
 <div class="container">
     <div class="row" id="first-row">
         <div class="col-md-8">
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal" role="form" method="post">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="followup-date-input" class="col-sm-3 control-label">Follow-Up Date:</label>
 
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="followup-date-input" placeholder="Follow_Up Date">
+                        <input type="date" class="form-control" id="date-input" name="date" placeholder="Follow_Up Date"
+                               value="{{ followup.date }}">
                     </div>
                     <div class="col-sm-5"></div>
                 </div>
@@ -60,7 +62,8 @@
                     <label for="followup-date-input" class="col-sm-3 control-label">Appointment Date:</label>
 
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="followup-date-input" placeholder="Appointment Date">
+                        <input type="date" class="form-control" id="appointment-date-input" name="appointment_date"
+                               placeholder="Appointment Date" value="{{ followup.appointment_date }}">
                     </div>
                     <div class="col-sm-5"></div>
                 </div>
@@ -69,13 +72,19 @@
                     <label for="followup-info-input" class="col-sm-3 control-label">Follow-Up Info:</label>
 
                     <div class="col-sm-9">
-                        <textarea type="text" row="4" class="form-control" id="followup-info-input"
-                                  placeholder="Follow-Up Info" style="resize:none;"></textarea>
+                        <textarea type="text" row="4" class="form-control" id="information-input"
+                                  placeholder="Follow-Up Info" name="information"
+                                  style="resize:none;">{{ followup.information }}</textarea>
                     </div>
                 </div>
-
-
-
+                <div class="col-md-offset-9 col-md-3" align="right">
+                    {% if surgery %}
+                        <button type="button" class="btn btn-danger btn-sm">Discard</button>
+                        <button type="submit" class="btn btn-success btn-sm" id="save-submit">Save Changes</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-default btn-sm" id="save-submit">Save</button>
+                    {% endif %}
+                </div>
             </form>
         </div>
 

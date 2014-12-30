@@ -17,7 +17,7 @@ def new_patient_view(request):
     else:
         full_name = get_name(request.user)
         if request.method == "POST":
-            print request.POST
+            print request.FILES
             form = PatientForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()

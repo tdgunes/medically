@@ -79,9 +79,9 @@
 
             }
 
-            var mandatoryFields = [$("#name-input"), $("#city-input"), $("#bday-input")]
-            var button = $("#save-submit")
-            validate(mandatoryFields, button)
+            var mandatoryFields = [$("#name-input"), $("#city-input"), $("#bday-input")];
+            var button = $("#save-submit");
+            validate(mandatoryFields, button);
         });
 
 
@@ -130,14 +130,18 @@
 
 <div class="container">
 <div class="row" id="first-row">
-    <form class="form-horizontal" action="" method="post">
+    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="col-md-2">
             <div id="drop_zone">
+                {% if photo_url  %}
+                <img class="img-thumbnail" src="{% static photo_url %}" alt="..." id="profile-photo">
+                {% else %}
                 <img class="img-thumbnail" src="{% static 'images/profile.jpg' %}" alt="..." id="profile-photo">
+                {% endif %}
             </div>
 
-            <input type="file" id="files" class="hidden" name="files[]" accept="image/*">
+            <input type="file" id="files" class="hidden" name="photo" accept="image/*">
         </div>
 
         <div class="col-md-5">
@@ -181,7 +185,7 @@
                     <div class="col-sm-10">
                         <input type="date" class="form-control" id="bday-input" name="date_of_birth"
                                placeholder="Birthday"
-                               value="{{ patient.date_of_birth.day }}/{{ patient.date_of_birth.month }}/{{ patient.date_of_birth.year }}">
+                               value="{{ patient.date_of_birth.month }}/{{ patient.date_of_birth.day }}/{{ patient.date_of_birth.year }}">
                     </div>
                 </div>
 

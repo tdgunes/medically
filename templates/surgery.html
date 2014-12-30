@@ -64,7 +64,7 @@
             <form class="form-horizontal" role="form" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="title-input" class="col-sm-3 control-label">Title:</label>
+                    <label for="title-input" class="col-sm-3 control-label">Title:<label id="required">*</label></label>
 
                     <div class="col-sm-9">
                     <input type="text" name="title" class="form-control" id="title-input"
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="date-input" class="col-sm-3 control-label">Surgery Date:</label>
+                    <label for="date-input" class="col-sm-3 control-label">Surgery Date:<label id="required">*</label></label>
 
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="date-input" name="date"

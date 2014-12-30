@@ -16,11 +16,12 @@ urlpatterns = patterns('',
     # Patient component related URLs
     url(r'^new_patient/$', views.new_patient_view, name="new_patient_view"),
     url(r'^(?P<patient_id>\d+)/$', views.patient_view, name='patient'),
-    url(r'^(?P<patient_id>\d+)/examination/(?P<examination_id>\d+)/$', views.examination_view, name='examination'),
+
     url(r'^search/$', views.search_view, name="search_view"),
 
     # Examination component related URLs
     url(r'^(?P<patient_id>\d+)/new_examination/$', views.new_examination_view, name='new_examination'),
+    url(r'^(?P<patient_id>\d+)/examination/(?P<examination_id>\d+)/$', views.examination_view, name='examination'),
     
     # Surgery component related URLs
     url(r'^(?P<patient_id>\d+)/examination/(?P<examination_id>\d+)/new_surgery/$',

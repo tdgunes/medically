@@ -5,7 +5,6 @@ from django.db import models, migrations
 import django.utils.timezone
 from . import load_super_users, unload_super_users
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -43,6 +42,19 @@ class Migration(migrations.Migration):
                 ('surgery_type', models.CharField(max_length=20, null=True, verbose_name=b'Surgery Type', blank=True)),
                 ('surgery_date', models.DateField(null=True, verbose_name=b'Surgery Date', blank=True)),
                 ('surgery_prep', models.CharField(max_length=1000, null=True, verbose_name=b'Surgery Preparation', blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Followup',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateField()),
+                ('information', models.TextField(max_length=1000, null=True, blank=True)),
+                ('appointment_date', models.DateField(null=True, blank=True)),
+                ('examination', models.ForeignKey(to='web.Examination')),
             ],
             options={
             },

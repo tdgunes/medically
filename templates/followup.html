@@ -49,7 +49,7 @@
             <form class="form-horizontal" role="form" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="followup-date-input" class="col-sm-3 control-label">Follow-Up Date:</label>
+                    <label for="followup-date-input" class="col-sm-3 control-label">Follow-Up Date:<label id="required">*</label></label>
 
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="date-input" name="date" placeholder="Follow_Up Date"

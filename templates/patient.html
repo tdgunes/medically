@@ -330,9 +330,9 @@
                 {% for exa in examinations %}
                     <tr onclick="window.document.location='{% url 'examination' patient_id=patient.id examination_id=exa.id %}';">
                         <td>{{ exa.id }}</td>
+                        <td>{{ exa.title }}</td>
                         <td>{{ exa.date }}</td>
                         <td>{{ exa.offered_treatment }}</td>
-                        <td>{{ exa.information }}</td>
                     </tr>
                 {% endfor %}
 

@@ -155,7 +155,10 @@
 {#                </div>#}
                 <div class="col-md-offset-9 col-md-3" align="right">
                     {% if examination %}
-                        <button type="button" class="btn btn-danger btn-sm">Discard</button>
+
+                            <input type="button" onclick="location.href='{% url 'delete_examination' patient_id=patient.id examination_id=examination.id %}'" class="btn btn-danger btn-sm" value="Delete">
+
+{#                        <button type="button" class="btn btn-danger btn-sm">Discard</button>#}
                         <button type="submit" class="btn btn-success btn-sm" id="save-submit">Save Changes</button>
 
                     {% else %}

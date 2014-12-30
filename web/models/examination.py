@@ -18,4 +18,4 @@ class Examination(models.Model):
 
 
     def __unicode__(self):
-        return self.patient.name_surname
+        return "{0} {1}".format(self.title,self.patient.full_name)

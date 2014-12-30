@@ -18,4 +18,4 @@ class Surgery(models.Model):
     equipments = models.CharField(max_length=200, null=True, blank=True)
 
     def __unicode__(self):
-        return self.full_name
+        return "{0}".format(self.title)

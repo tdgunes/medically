@@ -15,4 +15,4 @@ class Followup(models.Model):
     appointment_date = models.DateField(null=True, blank=True)
 
     def __unicode__(self):
-        return self.full_name
+        return "{0}".format(self.date)

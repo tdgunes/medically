@@ -6,6 +6,14 @@ from ..models import Patient, Examination
 from ..forms import ExaminationForm
 
 
+def delete_examination_view(request, patient_id, examination_id):
+    if not request.user.is_authenticated():
+        return redirect("homepage")
+    else:
+        examination = get_object_or_404(Examination, pk=examination_id)
+        examination.delete()
+        return redirect("patient", patient_id)
+
 
 def new_examination_view(request, patient_id):
     if not request.user.is_authenticated():
